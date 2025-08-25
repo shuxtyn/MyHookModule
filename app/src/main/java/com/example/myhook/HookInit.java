@@ -12,30 +12,40 @@ public class HookInit implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        // bỏ qua system process
-        if (lpparam.packageName.equals("android") || lpparam.packageName.equals("system")) return;
+        // Bỏ qua system process
+        if ("android".equals(lpparam.packageName) || "system".equals(lpparam.packageName)) return;
 
-        XposedHelpers.findAndHookMethod("android.app.Application", lpparam.classLoader, "attach", Context.class,
-            new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    Context ctx = (Context) param.args[0];
-                    ClassLoader cl = ctx.getClassLoader();
+        XposedHelpers.findAndHookMethod(
+                "android.app.Application",
+                lpparam.classLoader,
+                "attach",
+                Context.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        Context ctx = (Context) param.args[0];
+                        ClassLoader cl = ctx.getClassLoader();
 
-                    ConfigManager cfg = new ConfigManager();
-                    DeviceProfileGenerator gen = new DeviceProfileGenerator(lpparam.packageName, cfg.shouldRandom());
-                    profile = gen.getProfile();
-                    if (cfg.shouldRandom()) cfg.setShouldRandom(false);
+                        // ✅ Dùng constructor mới có Context
+                        ConfigManager cfg = new ConfigManager(ctx);
+                        DeviceProfileGenerator gen =
+                                new DeviceProfileGenerator(ctx, lpparam.packageName, cfg.shouldRandom());
+                        profile = gen.getProfile();
+                        if (cfg.shouldRandom()) cfg.setShouldRandom(false);
 
-                    safe(() -> {
-                        XposedHelpers.setStaticObjectField(android.os.Build.class, "MODEL", profile.model);
-                        XposedHelpers.setStaticObjectField(android.os.Build.class, "BRAND", profile.brand);
-                        XposedHelpers.setStaticObjectField(android.os.Build.class, "DEVICE", profile.device);
-                    });
+                        // Ví dụ hook Build.* (giữ nguyên các hook khác của bạn nếu có)
+                        safe(() -> {
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "MODEL", profile.model);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "BRAND", profile.brand);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "DEVICE", profile.device);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "MANUFACTURER", profile.manufacturer);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "FINGERPRINT", profile.fingerprint);
+                        });
 
-                    XposedBridge.log("[MyHook] Applied for " + lpparam.packageName);
+                        XposedBridge.log("[MyHook] Applied for " + lpparam.packageName);
+                    }
                 }
-            });
+        );
     }
 
     private static void safe(Runnable r) {
