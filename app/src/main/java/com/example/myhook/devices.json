@@ -1,0 +1,41 @@
+{
+  "Google": [
+    "Pixel 5", "Pixel 5a", "Pixel 6", "Pixel 6 Pro",
+    "Pixel 7", "Pixel 7 Pro", "Pixel 8", "Pixel 8 Pro"
+  ],
+  "Samsung": [
+    "SM-G991B Galaxy S21", "SM-G998B Galaxy S21 Ultra",
+    "SM-S901B Galaxy S22", "SM-S908B Galaxy S22 Ultra",
+    "SM-S911B Galaxy S23", "SM-S918B Galaxy S23 Ultra",
+    "SM-S921B Galaxy S24", "SM-S928B Galaxy S24 Ultra",
+    "SM-F936B Galaxy Z Fold4", "SM-F731B Galaxy Z Flip5"
+  ],
+  "OnePlus": [
+    "OnePlus 8 Pro", "OnePlus 9", "OnePlus 9 Pro",
+    "OnePlus 10 Pro", "OnePlus 11", "OnePlus 12",
+    "OnePlus Nord 2", "OnePlus Ace 2"
+  ],
+  "Xiaomi": [
+    "M2102K1G Mi 11", "2201123G Xiaomi 12", "2210132G Xiaomi 12T Pro",
+    "2211133G Xiaomi 13", "2210132C Xiaomi 13 Pro",
+    "M2101K7AG Redmi Note 10", "22041216G Redmi Note 11",
+    "22101316G Redmi Note 12", "23021RAAEG Redmi Note 12 Pro"
+  ],
+  "Oppo": [
+    "CPH2025 Find X2 Pro", "CPH2449 Find X6 Pro",
+    "CPH2307 Reno8", "CPH2551 Reno10 Pro",
+    "CPH2413 A98", "PGEM10 Find X5 Pro"
+  ],
+  "Realme": [
+    "RMX2202 GT", "RMX3301 GT2 Pro", "RMX3771 11 Pro+",
+    "RMX3706 GT Neo5", "RMX3687 11", "RMX3561 GT Neo3"
+  ],
+  "Sony": [
+    "Xperia 1 III", "Xperia 1 IV", "Xperia 1 V",
+    "Xperia 5 IV", "Xperia 10 V", "Xperia PRO-I"
+  ],
+  "Huawei": [
+    "ELS-NX9 P40 Pro", "NOH-NX9 Mate 40 Pro",
+    "JAD-AL50 P50", "JLN-LX1 Nova 9", "DCO-LX9 P60 Pro"
+  ]
+}
