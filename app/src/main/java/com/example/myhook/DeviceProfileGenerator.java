@@ -22,14 +22,15 @@ public class DeviceProfileGenerator {
     private static final int[] CHROME_MAJOR = {118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136};
     private static final String[] ALL_RELEASES = {"11","12","12L","13","14"};
 
+    // brand -> entries
     private static Map<String, List<DeviceEntry>> DEVICE_MAP;
 
     private static class DeviceEntry {
-        final String modelCode;
-        final String marketing;
-        final String deviceCode;
-        final String vendorProduct;
-        final String vendorDevice;
+        final String modelCode;    // Build.MODEL
+        final String marketing;    // marketing name
+        final String deviceCode;   // Build.DEVICE
+        final String vendorProduct;// ro.build.product / ro.vendor.product.oem
+        final String vendorDevice; // ro.vendor.product.device.oem
         final String minRelease;
         final String maxRelease;
         DeviceEntry(String code, String mk, String dev, String vProd, String vDev, String minR, String maxR) {
@@ -42,12 +43,22 @@ public class DeviceProfileGenerator {
     public DeviceProfileGenerator(Context ctx, String packageName, boolean shouldRandom) {
         this.profileFile = new File(ctx.getFilesDir(), "profile." + packageName + ".txt");
         ensureDevicesLoaded(ctx);
-        if (shouldRandom || !profileFile.exists()) {
+
+        if (shouldRandom) {
+            // LUÔN tạo mới & ghi đè (không load cũ)
             this.profile = generate();
-            save(this.profile);
+            saveAtomic(this.profile);
         } else {
-            this.profile = load();
-            if (this.profile == null) { this.profile = generate(); save(this.profile); }
+            if (profileFile.exists()) {
+                this.profile = load();
+                if (this.profile == null) {
+                    this.profile = generate();
+                    saveAtomic(this.profile);
+                }
+            } else {
+                this.profile = generate();
+                saveAtomic(this.profile);
+            }
         }
     }
 
@@ -68,19 +79,26 @@ public class DeviceProfileGenerator {
                 JSONArray arr = root.getJSONArray(brand);
                 List<DeviceEntry> list = new ArrayList<>(arr.length());
                 for (int i = 0; i < arr.length(); i++) {
-                    JSONObject o = arr.getJSONObject(i);
-                    String code  = o.optString("modelCode", "Generic");
-                    String mk    = o.optString("marketing", code);
-                    String dev   = o.optString("deviceCode", null);
-                    String vProd = o.optString("vendorProduct", null);
-                    String vDev  = o.optString("vendorDevice", null);
-                    String minR  = o.optString("minRelease", null);
-                    String maxR  = o.optString("maxRelease", null);
-                    list.add(new DeviceEntry(code, mk, dev, vProd, vDev, minR, maxR));
+                    Object item = arr.get(i);
+                    if (item instanceof JSONObject) {
+                        JSONObject o = (JSONObject) item;
+                        String code  = o.optString("modelCode",  o.optString("model", "Generic"));
+                        String mk    = o.optString("marketing", code);
+                        String dev   = o.optString("deviceCode", null);
+                        String vProd = o.optString("vendorProduct", null);
+                        String vDev  = o.optString("vendorDevice", null);
+                        String minR  = o.optString("minRelease", null);
+                        String maxR  = o.optString("maxRelease", null);
+                        list.add(new DeviceEntry(code, mk, dev, vProd, vDev, minR, maxR));
+                    } else {
+                        String code = String.valueOf(item);
+                        list.add(new DeviceEntry(code, code, null, null, null, null, null));
+                    }
                 }
                 if (!list.isEmpty()) DEVICE_MAP.put(brand, list);
             }
         } catch (Throwable t) {
+            // Fallback nhỏ để vẫn chạy được nếu assets/devices.json thiếu
             DEVICE_MAP.put("Oppo", Arrays.asList(
                     new DeviceEntry("PHY110", "Oppo Find X7 Ultra", "OP565FL1", "PHY110", "OP565FL1", "14", "14")
             ));
@@ -125,13 +143,20 @@ public class DeviceProfileGenerator {
         String ua = makeDynamicUA(release, e.marketing, buildId, r);
 
         return new DeviceProfile(
-                e.modelCode, brand, device, manufacturer, fingerprint,
+                e.modelCode,       // Build.MODEL
+                brand,
+                device,            // Build.DEVICE
+                manufacturer,
+                fingerprint,
                 androidId, imei, serial,
                 advertisingId, adLimitTracking,
                 fiid, appInstanceId, fcmToken,
-                ua, e.marketing,
-                e.vendorProduct, e.vendorDevice,
-                buildId, incremental
+                ua,
+                e.marketing,       // marketingName
+                e.vendorProduct,   // vendorProduct
+                e.vendorDevice,    // vendorDevice
+                buildId,           // buildId
+                incremental        // buildIncremental
         );
     }
 
@@ -176,6 +201,46 @@ public class DeviceProfileGenerator {
         return arr[r.nextInt(arr.length)];
     }
 
+    // --- Ghi đè an toàn bằng file tạm rồi rename ---
+    private void saveAtomic(DeviceProfile p) {
+        File dir = profileFile.getParentFile();
+        if (dir != null && !dir.exists()) dir.mkdirs();
+        File tmp = new File(dir, profileFile.getName() + ".tmp");
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(tmp))) {
+            w.write("MODEL=" + p.model + "\n");
+            w.write("MARKETING=" + p.marketingName + "\n");
+            w.write("BRAND=" + p.brand + "\n");
+            w.write("DEVICE=" + p.device + "\n");
+            w.write("MANUFACTURER=" + p.manufacturer + "\n");
+            w.write("FINGERPRINT=" + p.fingerprint + "\n");
+            w.write("ANDROID_ID=" + p.androidId + "\n");
+            w.write("IMEI=" + p.imei + "\n");
+            w.write("SERIAL=" + p.serial + "\n");
+            w.write("ADVERTISING_ID=" + p.advertisingId + "\n");
+            w.write("AD_LIMITED=" + p.adLimitTracking + "\n");
+            w.write("FIREBASE_INSTALLATIONS_ID=" + p.firebaseInstallationsId + "\n");
+            w.write("FIREBASE_APP_INSTANCE_ID=" + p.appInstanceId + "\n");
+            w.write("FCM_TOKEN=" + p.fcmToken + "\n");
+            w.write("VENDOR_PRODUCT=" + (p.vendorProduct == null ? "" : p.vendorProduct) + "\n");
+            w.write("VENDOR_DEVICE=" + (p.vendorDevice  == null ? "" : p.vendorDevice ) + "\n");
+            w.write("BUILD_ID=" + p.buildId + "\n");
+            w.write("BUILD_INCREMENTAL=" + p.buildIncremental + "\n");
+            w.write("USER_AGENT=" + p.userAgent + "\n");
+        } catch (IOException e) {
+            // fallback: ghi thẳng nếu atomic save lỗi
+            save(p);
+            return;
+        }
+        if (!tmp.renameTo(profileFile)) {
+            // Thử xóa file cũ rồi rename lại
+            //noinspection ResultOfMethodCallIgnored
+            profileFile.delete();
+            //noinspection ResultOfMethodCallIgnored
+            tmp.renameTo(profileFile);
+        }
+    }
+
+    // Giữ save() cũ làm fallback/tiện dùng lại
     private void save(DeviceProfile p) {
         try (BufferedWriter w = new BufferedWriter(new FileWriter(profileFile))) {
             w.write("MODEL=" + p.model + "\n");
@@ -193,7 +258,7 @@ public class DeviceProfileGenerator {
             w.write("FIREBASE_APP_INSTANCE_ID=" + p.appInstanceId + "\n");
             w.write("FCM_TOKEN=" + p.fcmToken + "\n");
             w.write("VENDOR_PRODUCT=" + (p.vendorProduct == null ? "" : p.vendorProduct) + "\n");
-            w.write("VENDOR_DEVICE=" + (p.vendorDevice == null ? "" : p.vendorDevice ) + "\n");
+            w.write("VENDOR_DEVICE=" + (p.vendorDevice  == null ? "" : p.vendorDevice ) + "\n");
             w.write("BUILD_ID=" + p.buildId + "\n");
             w.write("BUILD_INCREMENTAL=" + p.buildIncremental + "\n");
             w.write("USER_AGENT=" + p.userAgent + "\n");
@@ -208,8 +273,10 @@ public class DeviceProfileGenerator {
                 String[] kv = line.split("=", 2);
                 if (kv.length == 2) m.put(kv[0], kv[1]);
             }
-            String ua = m.getOrDefault("USER_AGENT",
-                    "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36");
+            String ua = m.getOrDefault(
+                    "USER_AGENT",
+                    "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
+            );
 
             return new DeviceProfile(
                     m.get("MODEL"),
