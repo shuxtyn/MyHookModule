@@ -34,14 +34,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # Bootstrap Gradle (không cần wrapper sẵn trong repo)
+      # Tải Gradle 8.7 (1 dòng URL, có retry)
       - name: Download Gradle ${{ env.GRADLE_VERSION }}
         run: |
           set -e
-          curl -sSLo gradle-${{ env.GRADLE_VERSION }}-bin.zip \
-            "https://services.gradle.org/distributions/gradle-${{ env.GRADLE_VERSION }}-bin.zip" --retry 5 --retry-all-errors
+          curl -sSLo gradle-${{ env.GRADLE_VERSION }}-bin.zip "https://services.gradle.org/distributions/gradle-${{ env.GRADLE_VERSION }}-bin.zip" --retry 5 --retry-all-errors
           unzip -q gradle-${{ env.GRADLE_VERSION }}-bin.zip
 
+      # Sinh wrapper "thật" bằng Gradle vừa tải
       - name: Generate Gradle Wrapper
         run: |
-          ./gradle-${{ env.GRADLE_VERSION }}/bin/gradle wrapper --gradle-_
+          ./gradle-${{ env.GRADLE_VERSION }}/bin/gradle wrapper --gradle-version ${{ env.GRADLE_VERSION }}
+          chmod +x gradlew
+          ./gradlew --version
+          ls -la gradle/wrapper
+
+      - name: Build with Gradle (debug)
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyHookModule-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
