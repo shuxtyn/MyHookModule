@@ -1,9 +1,9 @@
 package com.example.myhook;
 
 public class DeviceProfile {
-    public final String model;           // sẽ là modelCode (vd SM-G991B)
+    public final String model;           // modelCode (vd SM-G991B / PHY110)
     public final String brand;
-    public final String device;
+    public final String device;          // deviceCode (vd o1s / husky / OP565FL1)
     public final String manufacturer;
     public final String fingerprint;
 
@@ -19,16 +19,18 @@ public class DeviceProfile {
     public final String fcmToken;
 
     public final String userAgent;
+    public final String marketingName;   // NEW (đã có ở bản trước)
 
-    // NEW: tên thương mại (vd "Galaxy S21")
-    public final String marketingName;
+    // NEW: vendor props
+    public final String vendorProduct;   // map -> ro.build.product / ro.vendor.product.oem
+    public final String vendorDevice;    // map -> ro.vendor.product.device.oem
 
     public DeviceProfile(String model, String brand, String device, String manufacturer, String fingerprint,
                          String androidId, String imei, String serial,
                          String advertisingId, boolean adLimitTracking,
                          String firebaseInstallationsId, String appInstanceId, String fcmToken,
-                         String userAgent,
-                         String marketingName) {
+                         String userAgent, String marketingName,
+                         String vendorProduct, String vendorDevice) {
         this.model = model;
         this.brand = brand;
         this.device = device;
@@ -44,5 +46,7 @@ public class DeviceProfile {
         this.fcmToken = fcmToken;
         this.userAgent = userAgent;
         this.marketingName = marketingName;
+        this.vendorProduct = vendorProduct;
+        this.vendorDevice = vendorDevice;
     }
 }
