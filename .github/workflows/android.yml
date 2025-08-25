@@ -7,6 +7,9 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+env:
+  GRADLE_VERSION: "8.7"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,7 +34,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # ⬇️ Bootstrap Gradle without wrapper, then generate wrapper "for real"
-      - name: Download Gradle 8.7
+      # Bootstrap Gradle (không cần wrapper sẵn trong repo)
+      - name: Download Gradle ${{ env.GRADLE_VERSION }}
         run: |
-          curl -L -o gradle-8.7-bin.zip https://services.grad
+          set -e
+          curl -sSLo gradle-${{ env.GRADLE_VERSION }}-bin.zip \
+            "https://services.gradle.org/distributions/gradle-${{ env.GRADLE_VERSION }}-bin.zip" --retry 5 --retry-all-errors
+          unzip -q gradle-${{ env.GRADLE_VERSION }}-bin.zip
+
+      - name: Generate Gradle Wrapper
+        run: |
+          ./gradle-${{ env.GRADLE_VERSION }}/bin/gradle wrapper --gradle-_
