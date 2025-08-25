@@ -26,13 +26,16 @@ public class DeviceProfileGenerator {
     private static Map<String, List<DeviceEntry>> DEVICE_MAP;
 
     private static class DeviceEntry {
-        final String modelCode;   // ex: SM-G991B
-        final String marketing;   // ex: Galaxy S21
-        final String deviceCode;  // ex: o1s (optional)
-        final String minRelease;  // optional
-        final String maxRelease;  // optional
-        DeviceEntry(String code, String marketing, String deviceCode, String minR, String maxR) {
-            this.modelCode = code; this.marketing = marketing; this.deviceCode = deviceCode;
+        final String modelCode;    // Build.MODEL
+        final String marketing;    // marketing name
+        final String deviceCode;   // Build.DEVICE
+        final String vendorProduct;// ro.build.product / ro.vendor.product.oem
+        final String vendorDevice; // ro.vendor.product.device.oem
+        final String minRelease;
+        final String maxRelease;
+        DeviceEntry(String code, String mk, String dev, String vProd, String vDev, String minR, String maxR) {
+            this.modelCode = code; this.marketing = mk; this.deviceCode = dev;
+            this.vendorProduct = vProd; this.vendorDevice = vDev;
             this.minRelease = minR; this.maxRelease = maxR;
         }
     }
@@ -51,7 +54,6 @@ public class DeviceProfileGenerator {
 
     public DeviceProfile getProfile() { return profile; }
 
-    // ===== load JSON =====
     private static synchronized void ensureDevicesLoaded(Context ctx) {
         if (DEVICE_MAP != null) return;
         DEVICE_MAP = new LinkedHashMap<>();
@@ -73,24 +75,25 @@ public class DeviceProfileGenerator {
                         String code  = o.optString("modelCode",  o.optString("model", "Generic"));
                         String mk    = o.optString("marketing", code);
                         String dev   = o.optString("deviceCode", null);
+                        String vProd = o.optString("vendorProduct", null);
+                        String vDev  = o.optString("vendorDevice", null);
                         String minR  = o.optString("minRelease", null);
                         String maxR  = o.optString("maxRelease", null);
-                        list.add(new DeviceEntry(code, mk, dev, minR, maxR));
+                        list.add(new DeviceEntry(code, mk, dev, vProd, vDev, minR, maxR));
                     } else {
                         String code = String.valueOf(item);
-                        list.add(new DeviceEntry(code, code, null, null, null));
+                        list.add(new DeviceEntry(code, code, null, null, null, null, null));
                     }
                 }
                 if (!list.isEmpty()) DEVICE_MAP.put(brand, list);
             }
         } catch (Throwable t) {
-            DEVICE_MAP.put("Samsung", Arrays.asList(
-                    new DeviceEntry("SM-G991B", "Galaxy S21", "o1s", "11","13")
+            DEVICE_MAP.put("Oppo", Arrays.asList(
+                    new DeviceEntry("PHY110", "Oppo Find X7 Ultra", "OP565FL1", "PHY110", "OP565FL1", "14", "14")
             ));
         }
     }
 
-    // ===== generate =====
     private DeviceProfile generate() {
         Random r = new Random();
 
@@ -101,7 +104,6 @@ public class DeviceProfileGenerator {
 
         String release = pickReleaseWithin(e.minRelease, e.maxRelease, r);
 
-        // Nếu có deviceCode trong JSON, dùng trực tiếp. Nếu không có -> sinh hợp lệ.
         String device = (e.deviceCode != null && !e.deviceCode.isEmpty())
                 ? e.deviceCode
                 : toDeviceCode(e.modelCode, brand, r);
@@ -116,7 +118,6 @@ public class DeviceProfileGenerator {
                 brand.toLowerCase(Locale.US), product, device, release, buildId, incremental
         );
 
-        // IDs
         String androidId = uuid16();
         String imei = genImeiLuhn(r);
         String serial = UUID.randomUUID().toString().replace("-", "").substring(0,12).toUpperCase(Locale.US);
@@ -131,40 +132,36 @@ public class DeviceProfileGenerator {
         String ua = makeDynamicUA(release, e.marketing, buildId, r);
 
         return new DeviceProfile(
-                e.modelCode,       // model (Build.MODEL)
-                brand,             // brand
-                device,            // device (Build.DEVICE)
-                manufacturer,      // manufacturer
+                e.modelCode,       // Build.MODEL
+                brand,
+                device,            // Build.DEVICE
+                manufacturer,
                 fingerprint,
                 androidId, imei, serial,
                 advertisingId, adLimitTracking,
                 fiid, appInstanceId, fcmToken,
                 ua,
-                e.marketing        // marketingName
+                e.marketing,       // marketingName
+                e.vendorProduct,   // NEW
+                e.vendorDevice     // NEW
         );
     }
 
-    // ===== helpers =====
+    // helpers
     private static String uuid16() { return UUID.randomUUID().toString().replace("-", "").substring(0,16); }
-
     private static String toDeviceCode(String modelCode, String brand, Random r) {
         String base = (brand + "_" + modelCode).toLowerCase(Locale.US)
-                .replaceAll("[^a-z0-9]+", "_")
-                .replaceAll("^_+|_+$", "");
+                .replaceAll("[^a-z0-9]+", "_").replaceAll("^_+|_+$", "");
         return base + "_" + (100 + r.nextInt(900));
     }
-
     private static String makeDynamicUA(String androidRelease, String marketing, String buildId, Random r) {
         int major = CHROME_MAJOR[r.nextInt(CHROME_MAJOR.length)];
         int buildA = 4000 + r.nextInt(1200);
         int buildB = 50 + r.nextInt(300);
-        return String.format(
-                Locale.US,
+        return String.format(Locale.US,
                 "Mozilla/5.0 (Linux; Android %s; %s Build/%s) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/%d.0.%d.%d Mobile Safari/537.36",
-                androidRelease, marketing, buildId, major, buildA, buildB
-        );
+                androidRelease, marketing, buildId, major, buildA, buildB);
     }
-
     private static String pickReleaseWithin(String minR, String maxR, Random r) {
         List<String> ordered = Arrays.asList(ALL_RELEASES);
         int lo = (minR == null) ? 0 : Math.max(0, ordered.indexOf(minR));
@@ -172,23 +169,15 @@ public class DeviceProfileGenerator {
         if (lo < 0) lo = 0; if (hi < 0) hi = ordered.size()-1;
         return ordered.get(lo + r.nextInt(hi - lo + 1));
     }
-
     private static String genImeiLuhn(Random r) {
         int[] d = new int[15];
         for (int i = 0; i < 14; i++) d[i] = r.nextInt(10);
-        d[14] = luhnDigit(d, 14);
+        int sum = 0;
+        for (int i = 0; i < 14; i++) { int v = d[13 - i]; if (i % 2 == 0) { v *= 2; if (v > 9) v -= 9; } sum += v; }
+        d[14] = (10 - (sum % 10)) % 10;
         StringBuilder sb = new StringBuilder(15);
         for (int x : d) sb.append(x);
         return sb.toString();
-    }
-    private static int luhnDigit(int[] digits, int len) {
-        int sum = 0;
-        for (int i = 0; i < len; i++) {
-            int v = digits[len - 1 - i];
-            if (i % 2 == 0) { v *= 2; if (v > 9) v -= 9; }
-            sum += v;
-        }
-        return (10 - (sum % 10)) % 10;
     }
 
     private void save(DeviceProfile p) {
@@ -207,6 +196,9 @@ public class DeviceProfileGenerator {
             w.write("FIREBASE_INSTALLATIONS_ID=" + p.firebaseInstallationsId + "\n");
             w.write("FIREBASE_APP_INSTANCE_ID=" + p.appInstanceId + "\n");
             w.write("FCM_TOKEN=" + p.fcmToken + "\n");
+            // NEW vendor lines
+            w.write("VENDOR_PRODUCT=" + (p.vendorProduct == null ? "" : p.vendorProduct) + "\n");
+            w.write("VENDOR_DEVICE=" + (p.vendorDevice  == null ? "" : p.vendorDevice ) + "\n");
             w.write("USER_AGENT=" + p.userAgent + "\n");
         } catch (IOException ignored) {}
     }
@@ -227,14 +219,4 @@ public class DeviceProfileGenerator {
                     m.get("ANDROID_ID"), m.get("IMEI"), m.get("SERIAL"),
                     m.getOrDefault("ADVERTISING_ID", UUID.randomUUID().toString()),
                     "true".equalsIgnoreCase(m.getOrDefault("AD_LIMITED","false")),
-                    m.getOrDefault("FIREBASE_INSTALLATIONS_ID", UUID.randomUUID().toString()),
-                    m.getOrDefault("FIREBASE_APP_INSTANCE_ID", UUID.randomUUID().toString().replace("-", "")),
-                    m.getOrDefault("FCM_TOKEN", UUID.randomUUID().toString().replace("-", "")),
-                    ua,
-                    m.getOrDefault("MARKETING", m.getOrDefault("MODEL", "Generic"))
-            );
-        } catch (IOException e) {
-            return null;
-        }
-    }
-}
+                    m.getOrDefault("FIREBASE_INSTALLATIONS_
