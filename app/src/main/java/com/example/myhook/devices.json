@@ -1,41 +1,49 @@
 {
-  "Google": [
-    "Pixel 5", "Pixel 5a", "Pixel 6", "Pixel 6 Pro",
-    "Pixel 7", "Pixel 7 Pro", "Pixel 8", "Pixel 8 Pro"
-  ],
   "Samsung": [
-    "SM-G991B Galaxy S21", "SM-G998B Galaxy S21 Ultra",
-    "SM-S901B Galaxy S22", "SM-S908B Galaxy S22 Ultra",
-    "SM-S911B Galaxy S23", "SM-S918B Galaxy S23 Ultra",
-    "SM-S921B Galaxy S24", "SM-S928B Galaxy S24 Ultra",
-    "SM-F936B Galaxy Z Fold4", "SM-F731B Galaxy Z Flip5"
+    { "modelCode": "SM-G991B", "marketing": "Galaxy S21",        "deviceCode": "o1s",   "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "SM-G996B", "marketing": "Galaxy S21+",       "deviceCode": "o1q",   "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "SM-G998B", "marketing": "Galaxy S21 Ultra",  "deviceCode": "p3s",   "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "SM-S901B", "marketing": "Galaxy S22",        "deviceCode": "r0s",   "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "SM-S906B", "marketing": "Galaxy S22+",       "deviceCode": "g0q",   "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "SM-S908B", "marketing": "Galaxy S22 Ultra",  "deviceCode": "b0q",   "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "SM-S911B", "marketing": "Galaxy S23",        "deviceCode": "dm1q",  "minRelease": "13", "maxRelease": "14" },
+    { "modelCode": "SM-S916B", "marketing": "Galaxy S23+",       "deviceCode": "dm2q",  "minRelease": "13", "maxRelease": "14" },
+    { "modelCode": "SM-S918B", "marketing": "Galaxy S23 Ultra",  "deviceCode": "dm3q",  "minRelease": "13", "maxRelease": "14" },
+    { "modelCode": "SM-S921B", "marketing": "Galaxy S24",        "deviceCode": "e1q",   "minRelease": "14", "maxRelease": "14" },
+    { "modelCode": "SM-S926B", "marketing": "Galaxy S24+",       "deviceCode": "e2q",   "minRelease": "14", "maxRelease": "14" },
+    { "modelCode": "SM-S928B", "marketing": "Galaxy S24 Ultra",  "deviceCode": "e3q",   "minRelease": "14", "maxRelease": "14" }
   ],
-  "OnePlus": [
-    "OnePlus 8 Pro", "OnePlus 9", "OnePlus 9 Pro",
-    "OnePlus 10 Pro", "OnePlus 11", "OnePlus 12",
-    "OnePlus Nord 2", "OnePlus Ace 2"
+  "Google": [
+    { "modelCode": "Pixel 5",     "marketing": "Pixel 5",     "deviceCode": "redfin",  "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "Pixel 5a",    "marketing": "Pixel 5a",    "deviceCode": "barbet",  "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "Pixel 6",     "marketing": "Pixel 6",     "deviceCode": "oriole",  "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "Pixel 6 Pro", "marketing": "Pixel 6 Pro", "deviceCode": "raven",   "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "Pixel 6a",    "marketing": "Pixel 6a",    "deviceCode": "bluejay", "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "Pixel 7",     "marketing": "Pixel 7",     "deviceCode": "panther", "minRelease": "13", "maxRelease": "14" },
+    { "modelCode": "Pixel 7 Pro", "marketing": "Pixel 7 Pro", "deviceCode": "cheetah", "minRelease": "13", "maxRelease": "14" },
+    { "modelCode": "Pixel 7a",    "marketing": "Pixel 7a",    "deviceCode": "lynx",    "minRelease": "13", "maxRelease": "14" },
+    { "modelCode": "Pixel 8",     "marketing": "Pixel 8",     "deviceCode": "shiba",   "minRelease": "14", "maxRelease": "14" },
+    { "modelCode": "Pixel 8 Pro", "marketing": "Pixel 8 Pro", "deviceCode": "husky",   "minRelease": "14", "maxRelease": "14" }
   ],
   "Xiaomi": [
-    "M2102K1G Mi 11", "2201123G Xiaomi 12", "2210132G Xiaomi 12T Pro",
-    "2211133G Xiaomi 13", "2210132C Xiaomi 13 Pro",
-    "M2101K7AG Redmi Note 10", "22041216G Redmi Note 11",
-    "22101316G Redmi Note 12", "23021RAAEG Redmi Note 12 Pro"
+    { "modelCode": "M2011K2G",  "marketing": "Mi 11",          "deviceCode": "venus",  "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "M2102K1G",  "marketing": "Mi 11 Ultra",    "deviceCode": "star",   "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "2201123G",  "marketing": "Xiaomi 12",      "deviceCode": "cupid",  "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "2112123AC", "marketing": "Xiaomi 12 Pro",  "deviceCode": "zeus",   "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "2210132G",  "marketing": "Xiaomi 12T Pro", "deviceCode": "diting", "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "23013PC75G","marketing": "Xiaomi 13",      "deviceCode": "fuxi",   "minRelease": "13", "maxRelease": "14" },
+    { "modelCode": "2211133C",  "marketing": "Redmi K60",      "deviceCode": "mondrian","minRelease": "13","maxRelease": "14" },
+    { "modelCode": "22071212AG","marketing": "Redmi Note 12",  "deviceCode": "sunstone","minRelease": "12","maxRelease": "14" }
+  ],
+  "OnePlus": [
+    { "modelCode": "LE2113",   "marketing": "OnePlus 9",      "deviceCode": "lemonade",  "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "LE2123",   "marketing": "OnePlus 9 Pro",  "deviceCode": "lemonadep", "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "NE2213",   "marketing": "OnePlus 10 Pro", "deviceCode": "negroni",   "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "CPH2449",  "marketing": "OnePlus 11",     "deviceCode": "salami",    "minRelease": "13", "maxRelease": "14" }
   ],
   "Oppo": [
-    "CPH2025 Find X2 Pro", "CPH2449 Find X6 Pro",
-    "CPH2307 Reno8", "CPH2551 Reno10 Pro",
-    "CPH2413 A98", "PGEM10 Find X5 Pro"
-  ],
-  "Realme": [
-    "RMX2202 GT", "RMX3301 GT2 Pro", "RMX3771 11 Pro+",
-    "RMX3706 GT Neo5", "RMX3687 11", "RMX3561 GT Neo3"
-  ],
-  "Sony": [
-    "Xperia 1 III", "Xperia 1 IV", "Xperia 1 V",
-    "Xperia 5 IV", "Xperia 10 V", "Xperia PRO-I"
-  ],
-  "Huawei": [
-    "ELS-NX9 P40 Pro", "NOH-NX9 Mate 40 Pro",
-    "JAD-AL50 P50", "JLN-LX1 Nova 9", "DCO-LX9 P60 Pro"
+    { "modelCode": "CPH2207",  "marketing": "Oppo Find X3 Pro", "deviceCode": "kona",   "minRelease": "11", "maxRelease": "13" },
+    { "modelCode": "PGEM10",   "marketing": "Oppo Find X5 Pro", "deviceCode": "taro",   "minRelease": "12", "maxRelease": "14" },
+    { "modelCode": "PGEM110",  "marketing": "Oppo Find X6 Pro", "deviceCode": "kalama", "minRelease": "13", "maxRelease": "14" }
   ]
 }
