@@ -30,23 +30,29 @@ public class HookInit implements IXposedHookLoadPackage {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         Context ctx = (Context) param.args[0];
 
-                        // === Load cấu hình + sinh profile ===
+                        // === Load config + sinh profile ===
                         ConfigManager cfg = new ConfigManager(ctx);
-                        DeviceProfileGenerator gen = new DeviceProfileGenerator(ctx, lpparam.packageName, cfg.shouldRandom());
+                        DeviceProfileGenerator gen =
+                                new DeviceProfileGenerator(ctx, lpparam.packageName, cfg.shouldRandom());
                         profile = gen.getProfile();
                         if (cfg.shouldRandom()) cfg.setShouldRandom(false);
 
-                        // === Hook Build.* cơ bản ===
+                        // === Hook Build.* cơ bản + Build Number ===
                         safe(() -> {
-                            // Lưu ý: nhiều ROM kỳ vọng chữ thường cho BRAND/MANUFACTURER
-                            String brandLower = profile.brand == null ? null : profile.brand.toLowerCase(Locale.US);
-                            String mfrLower   = profile.manufacturer == null ? null : profile.manufacturer.toLowerCase(Locale.US);
+                            String brandLower = nzLower(profile.brand);
+                            String mfrLower   = nzLower(profile.manufacturer);
 
-                            XposedHelpers.setStaticObjectField(android.os.Build.class, "MODEL", profile.model);              // SM-G991B / PHY110 ...
-                            XposedHelpers.setStaticObjectField(android.os.Build.class, "BRAND", brandLower);                // samsung / oppo / vivo ...
-                            XposedHelpers.setStaticObjectField(android.os.Build.class, "DEVICE", profile.device);            // o1s / husky / OP565FL1 ...
-                            XposedHelpers.setStaticObjectField(android.os.Build.class, "MANUFACTURER", mfrLower);           // samsung / oppo ...
-                            XposedHelpers.setStaticObjectField(android.os.Build.class, "FINGERPRINT", profile.fingerprint); // build fingerprint
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "MODEL",       profile.model);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "BRAND",       brandLower);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "DEVICE",      profile.device);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "MANUFACTURER", mfrLower);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "FINGERPRINT", profile.fingerprint);
+
+                            // Build Number
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "ID",         profile.buildId);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "INCREMENTAL", profile.buildIncremental);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "DISPLAY",
+                                    profile.buildId + "." + profile.buildIncremental);
                         });
 
                         // === SystemProperties.get(...) → trả về giá trị giả lập ===
@@ -54,43 +60,47 @@ public class HookInit implements IXposedHookLoadPackage {
 
                         // Helper điền nhóm ro.product.<partition>.*
                         String nameFallback = makeProductName(profile); // ví dụ: samsung_SM-G991B
-                        fillProductNamespace(propMap, "",        profile, nameFallback);
-                        fillProductNamespace(propMap, "system",  profile, nameFallback);
+                        fillProductNamespace(propMap, "",           profile, nameFallback);
+                        fillProductNamespace(propMap, "system",     profile, nameFallback);
                         fillProductNamespace(propMap, "system_ext", profile, nameFallback);
-                        fillProductNamespace(propMap, "product", profile, nameFallback);
-                        fillProductNamespace(propMap, "odm",     profile, nameFallback);
-                        fillProductNamespace(propMap, "vendor",  profile, nameFallback);
+                        fillProductNamespace(propMap, "product",    profile, nameFallback);
+                        fillProductNamespace(propMap, "odm",        profile, nameFallback);
+                        fillProductNamespace(propMap, "vendor",     profile, nameFallback);
 
-                        // Các khóa tổng quát
+                        // Tổng quát
                         put(propMap, "ro.build.product",         nz(profile.vendorProduct, profile.model));
-                        put(propMap, "ro.product.board",         profile.device);           // thường gần DEVICE
+                        put(propMap, "ro.product.board",         profile.device);
                         put(propMap, "ro.build.fingerprint",     profile.fingerprint);
 
-                        // Một số khóa "OEM/vendor" hay gặp (tùy hãng/ROM) — [Unverified] tên khóa theo cộng đồng
-                        // Samsung
-                        put(propMap, "ro.product.vendor.model",  profile.model);           // [Unverified]
-                        put(propMap, "ro.boot.hardware.sku",     profile.model);           // [Unverified]
+                        // Build Number (một số app đọc từ prop)
+                        put(propMap, "ro.build.id",              profile.buildId);
+                        put(propMap, "ro.build.display.id",      profile.buildId + "." + profile.buildIncremental);
+                        put(propMap, "ro.build.version.incremental", profile.buildIncremental);
+
+                        // Samsung (thường không cần, nhưng thêm cho đủ)
+                        put(propMap, "ro.product.vendor.model",  profile.model);        // [Unverified]
+                        put(propMap, "ro.boot.hardware.sku",     profile.model);        // [Unverified]
 
                         // OPPO / Realme (OPlus)
-                        put(propMap, "ro.vendor.product.oem",          nz(profile.vendorProduct, profile.model)); // ví dụ PHY110
-                        put(propMap, "ro.vendor.product.device.oem",   nz(profile.vendorDevice,  profile.device)); // ví dụ OP565FL1
-                        put(propMap, "ro.oplus.market.name",           profile.marketingName);  // [Unverified] hiển thị marketing
-                        put(propMap, "ro.oplus.device",                profile.device);         // [Unverified]
-                        put(propMap, "ro.oplus.product.name",          nz(profile.vendorProduct, profile.model)); // [Unverified]
+                        put(propMap, "ro.vendor.product.oem",        nz(profile.vendorProduct, profile.model));
+                        put(propMap, "ro.vendor.product.device.oem", nz(profile.vendorDevice,  profile.device));
+                        put(propMap, "ro.oplus.market.name",         profile.marketingName);   // [Unverified]
+                        put(propMap, "ro.oplus.device",              profile.device);         // [Unverified]
+                        put(propMap, "ro.oplus.product.name",        nz(profile.vendorProduct, profile.model)); // [Unverified]
 
                         // OnePlus
-                        put(propMap, "ro.oneplus.device",              profile.device);         // [Unverified]
-                        put(propMap, "ro.oneplus.product.name",        nz(profile.vendorProduct, profile.model)); // [Unverified]
-                        put(propMap, "ro.product.oem",                 nz(profile.vendorProduct, profile.model)); // [Unverified]
+                        put(propMap, "ro.oneplus.device",            profile.device);         // [Unverified]
+                        put(propMap, "ro.oneplus.product.name",      nz(profile.vendorProduct, profile.model)); // [Unverified]
+                        put(propMap, "ro.product.oem",               nz(profile.vendorProduct, profile.model)); // [Unverified]
 
                         // Vivo
-                        put(propMap, "ro.vivo.model",                  profile.model);          // [Unverified]
-                        put(propMap, "ro.vivo.product.model",          profile.model);          // [Unverified]
-                        put(propMap, "ro.vivo.market.name",            profile.marketingName);  // [Unverified]
+                        put(propMap, "ro.vivo.model",                profile.model);          // [Unverified]
+                        put(propMap, "ro.vivo.product.model",        profile.model);          // [Unverified]
+                        put(propMap, "ro.vivo.market.name",          profile.marketingName);  // [Unverified]
 
-                        // Một số khóa hay đọc để hiển thị tên máy dạng marketing
-                        put(propMap, "ro.product.market.name",         profile.marketingName);  // [Unverified]
-                        put(propMap, "ro.product.vendor.market.name",  profile.marketingName);  // [Unverified]
+                        // Một số khóa hiển thị marketing
+                        put(propMap, "ro.product.market.name",        profile.marketingName); // [Unverified]
+                        put(propMap, "ro.product.vendor.market.name", profile.marketingName); // [Unverified]
 
                         // Hook get(String)
                         XposedHelpers.findAndHookMethod(
@@ -133,12 +143,12 @@ public class HookInit implements IXposedHookLoadPackage {
     // ===== Helpers =====
 
     private static void fillProductNamespace(Map<String, String> map, String partition, DeviceProfile p, String nameFallback) {
-        String prefix = partition == null || partition.isEmpty()
+        String prefix = (partition == null || partition.isEmpty())
                 ? "ro.product"
                 : "ro.product." + partition;
 
-        String brandLower = p.brand == null ? null : p.brand.toLowerCase(Locale.US);
-        String manufLower = p.manufacturer == null ? null : p.manufacturer.toLowerCase(Locale.US);
+        String brandLower = nzLower(p.brand);
+        String manufLower = nzLower(p.manufacturer);
 
         put(map, prefix + ".brand",         brandLower);
         put(map, prefix + ".manufacturer",  manufLower);
@@ -160,6 +170,10 @@ public class HookInit implements IXposedHookLoadPackage {
 
     private static String nz(String a, String b) {
         return (a != null && !a.isEmpty()) ? a : b;
+    }
+
+    private static String nzLower(String s) {
+        return (s == null) ? null : s.toLowerCase(Locale.US);
     }
 
     private static void safe(Runnable r) {
