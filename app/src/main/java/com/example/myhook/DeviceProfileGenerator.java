@@ -109,7 +109,7 @@ public class DeviceProfileGenerator {
                 : toDeviceCode(e.modelCode, brand, r);
 
         String manufacturer = brand;
-        String buildId = pick(BUILD_IDS, r);
+        String buildId = pick(BUILD_IDS, r); // cần pick(String[], Random)
         String incremental = String.valueOf(1000000 + r.nextInt(9000000));
         String product = (brand + "_" + e.modelCode).toLowerCase(Locale.US).replaceAll("[^a-z0-9]+", "_");
 
@@ -142,18 +142,20 @@ public class DeviceProfileGenerator {
                 fiid, appInstanceId, fcmToken,
                 ua,
                 e.marketing,       // marketingName
-                e.vendorProduct,   // NEW
-                e.vendorDevice     // NEW
+                e.vendorProduct,   // vendorProduct
+                e.vendorDevice     // vendorDevice
         );
     }
 
-    // helpers
+    // ===== helpers =====
     private static String uuid16() { return UUID.randomUUID().toString().replace("-", "").substring(0,16); }
+
     private static String toDeviceCode(String modelCode, String brand, Random r) {
         String base = (brand + "_" + modelCode).toLowerCase(Locale.US)
                 .replaceAll("[^a-z0-9]+", "_").replaceAll("^_+|_+$", "");
         return base + "_" + (100 + r.nextInt(900));
     }
+
     private static String makeDynamicUA(String androidRelease, String marketing, String buildId, Random r) {
         int major = CHROME_MAJOR[r.nextInt(CHROME_MAJOR.length)];
         int buildA = 4000 + r.nextInt(1200);
@@ -162,6 +164,7 @@ public class DeviceProfileGenerator {
                 "Mozilla/5.0 (Linux; Android %s; %s Build/%s) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/%d.0.%d.%d Mobile Safari/537.36",
                 androidRelease, marketing, buildId, major, buildA, buildB);
     }
+
     private static String pickReleaseWithin(String minR, String maxR, Random r) {
         List<String> ordered = Arrays.asList(ALL_RELEASES);
         int lo = (minR == null) ? 0 : Math.max(0, ordered.indexOf(minR));
@@ -169,6 +172,7 @@ public class DeviceProfileGenerator {
         if (lo < 0) lo = 0; if (hi < 0) hi = ordered.size()-1;
         return ordered.get(lo + r.nextInt(hi - lo + 1));
     }
+
     private static String genImeiLuhn(Random r) {
         int[] d = new int[15];
         for (int i = 0; i < 14; i++) d[i] = r.nextInt(10);
@@ -178,6 +182,11 @@ public class DeviceProfileGenerator {
         StringBuilder sb = new StringBuilder(15);
         for (int x : d) sb.append(x);
         return sb.toString();
+    }
+
+    // --- helpers bổ sung: pick cho mảng String
+    private static String pick(String[] arr, Random r) {
+        return arr[r.nextInt(arr.length)];
     }
 
     private void save(DeviceProfile p) {
@@ -196,7 +205,7 @@ public class DeviceProfileGenerator {
             w.write("FIREBASE_INSTALLATIONS_ID=" + p.firebaseInstallationsId + "\n");
             w.write("FIREBASE_APP_INSTANCE_ID=" + p.appInstanceId + "\n");
             w.write("FCM_TOKEN=" + p.fcmToken + "\n");
-            // NEW vendor lines
+            // vendor lines
             w.write("VENDOR_PRODUCT=" + (p.vendorProduct == null ? "" : p.vendorProduct) + "\n");
             w.write("VENDOR_DEVICE=" + (p.vendorDevice  == null ? "" : p.vendorDevice ) + "\n");
             w.write("USER_AGENT=" + p.userAgent + "\n");
