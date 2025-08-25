@@ -1,52 +1,3621 @@
 {
   "Samsung": [
-    { "modelCode": "SM-G991B", "marketing": "Galaxy S21", "deviceCode": "o1s", "vendorProduct": "o1sxxx", "vendorDevice": "G991BXX", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "SM-G996B", "marketing": "Galaxy S21+", "deviceCode": "o1q", "vendorProduct": "o1qxxx", "vendorDevice": "G996BXX", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "SM-G998B", "marketing": "Galaxy S21 Ultra", "deviceCode": "p3s", "vendorProduct": "p3sxxx", "vendorDevice": "G998BXX", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "SM-S901B", "marketing": "Galaxy S22", "deviceCode": "r0s", "vendorProduct": "r0sxxx", "vendorDevice": "S901BXX", "minRelease": "12", "maxRelease": "14" },
-    { "modelCode": "SM-S908B", "marketing": "Galaxy S22 Ultra", "deviceCode": "b0q", "vendorProduct": "b0qxxx", "vendorDevice": "S908BXX", "minRelease": "12", "maxRelease": "14" },
-    { "modelCode": "SM-S918B", "marketing": "Galaxy S23 Ultra", "deviceCode": "dm3q", "vendorProduct": "dm3qxxx", "vendorDevice": "S918BXX", "minRelease": "13", "maxRelease": "14" },
-    { "modelCode": "SM-S928B", "marketing": "Galaxy S24 Ultra", "deviceCode": "e3q", "vendorProduct": "e3qxxx", "vendorDevice": "S928BXX", "minRelease": "14", "maxRelease": "14" }
+    {
+      "modelCode": "SM-G991B",
+      "marketing": "Galaxy S21",
+      "deviceCode": "o1s",
+      "vendorProduct": "o1s",
+      "vendorDevice": "G991BXX",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "SM-G996B",
+      "marketing": "Galaxy S21+",
+      "deviceCode": "o1q",
+      "vendorProduct": "o1q",
+      "vendorDevice": "G996BXX",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "SM-G998B",
+      "marketing": "Galaxy S21 Ultra",
+      "deviceCode": "p3s",
+      "vendorProduct": "p3s",
+      "vendorDevice": "G998BXX",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "SM-S908B",
+      "marketing": "Galaxy S22 Ultra",
+      "deviceCode": "b0q",
+      "vendorProduct": "b0q",
+      "vendorDevice": "S908BXX",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-S918B",
+      "marketing": "Galaxy S23 Ultra",
+      "deviceCode": "dm3q",
+      "vendorProduct": "dm3q",
+      "vendorDevice": "S918BXX",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-S928B",
+      "marketing": "Galaxy S24 Ultra",
+      "deviceCode": "e3q",
+      "vendorProduct": "e3q",
+      "vendorDevice": "S928BXX",
+      "minRelease": "14",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A546B",
+      "marketing": "Galaxy A54 5G",
+      "deviceCode": "a54x",
+      "vendorProduct": "a54x",
+      "vendorDevice": "A546BXX",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A536B",
+      "marketing": "Galaxy A53 5G",
+      "deviceCode": "a53x",
+      "vendorProduct": "a53x",
+      "vendorDevice": "A536BXX",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M336B",
+      "marketing": "Galaxy M33",
+      "deviceCode": "m33x",
+      "vendorProduct": "m33x",
+      "vendorDevice": "M336BXX",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A104",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A218",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_ultra",
+      "vendorProduct": "a_ultra",
+      "vendorDevice": "a_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A001",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A890",
+      "marketing": "Galaxy A 5G",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A863",
+      "marketing": "Galaxy A Ultra",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A026",
+      "marketing": "Galaxy A Plus",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A235",
+      "marketing": "Galaxy A",
+      "deviceCode": "a",
+      "vendorProduct": "a",
+      "vendorDevice": "a",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A615",
+      "marketing": "Galaxy A Plus",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A078",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_ultra",
+      "vendorProduct": "a_ultra",
+      "vendorDevice": "a_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A184",
+      "marketing": "Galaxy A 5G",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A931",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A413",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_ultra",
+      "vendorProduct": "a_ultra",
+      "vendorDevice": "a_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A475",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A534",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A832",
+      "marketing": "Galaxy A Ultra",
+      "deviceCode": "a_ultra",
+      "vendorProduct": "a_ultra",
+      "vendorDevice": "a_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A483",
+      "marketing": "Galaxy A Plus",
+      "deviceCode": "a",
+      "vendorProduct": "a",
+      "vendorDevice": "a",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A305",
+      "marketing": "Galaxy A Ultra",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A139",
+      "marketing": "Galaxy A Plus",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A767",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A238",
+      "marketing": "Galaxy A 5G",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A969",
+      "marketing": "Galaxy A Ultra",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A328",
+      "marketing": "Galaxy A Ultra",
+      "deviceCode": "a",
+      "vendorProduct": "a",
+      "vendorDevice": "a",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A012",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_ultra",
+      "vendorProduct": "a_ultra",
+      "vendorDevice": "a_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A916",
+      "marketing": "Galaxy A Ultra",
+      "deviceCode": "a_ultra",
+      "vendorProduct": "a_ultra",
+      "vendorDevice": "a_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A848",
+      "marketing": "Galaxy A",
+      "deviceCode": "a",
+      "vendorProduct": "a",
+      "vendorDevice": "a",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A845",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A627",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A828",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A893",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A288",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A701",
+      "marketing": "Galaxy A Plus",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A303",
+      "marketing": "Galaxy A 5G",
+      "deviceCode": "a",
+      "vendorProduct": "a",
+      "vendorDevice": "a",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A171",
+      "marketing": "Galaxy A 5G",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A278",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A896",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A465",
+      "marketing": "Galaxy A Ultra",
+      "deviceCode": "a_ultra",
+      "vendorProduct": "a_ultra",
+      "vendorDevice": "a_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A133",
+      "marketing": "Galaxy A",
+      "deviceCode": "a_plus",
+      "vendorProduct": "a_plus",
+      "vendorDevice": "a_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A098",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A010",
+      "marketing": "Galaxy A Pro",
+      "deviceCode": "a",
+      "vendorProduct": "a",
+      "vendorDevice": "a",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-A051",
+      "marketing": "Galaxy A 5G",
+      "deviceCode": "a_pro",
+      "vendorProduct": "a_pro",
+      "vendorDevice": "a_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M473",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m_pro",
+      "vendorProduct": "m_pro",
+      "vendorDevice": "m_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M997",
+      "marketing": "Galaxy M Pro",
+      "deviceCode": "m_ultra",
+      "vendorProduct": "m_ultra",
+      "vendorDevice": "m_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M631",
+      "marketing": "Galaxy M",
+      "deviceCode": "m_ultra",
+      "vendorProduct": "m_ultra",
+      "vendorDevice": "m_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M566",
+      "marketing": "Galaxy M Ultra",
+      "deviceCode": "m",
+      "vendorProduct": "m",
+      "vendorDevice": "m",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M106",
+      "marketing": "Galaxy M Plus",
+      "deviceCode": "m",
+      "vendorProduct": "m",
+      "vendorDevice": "m",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M333",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m_ultra",
+      "vendorProduct": "m_ultra",
+      "vendorDevice": "m_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M262",
+      "marketing": "Galaxy M Plus",
+      "deviceCode": "m_ultra",
+      "vendorProduct": "m_ultra",
+      "vendorDevice": "m_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M317",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m",
+      "vendorProduct": "m",
+      "vendorDevice": "m",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M080",
+      "marketing": "Galaxy M",
+      "deviceCode": "m_pro",
+      "vendorProduct": "m_pro",
+      "vendorDevice": "m_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M267",
+      "marketing": "Galaxy M Ultra",
+      "deviceCode": "m_pro",
+      "vendorProduct": "m_pro",
+      "vendorDevice": "m_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M602",
+      "marketing": "Galaxy M Ultra",
+      "deviceCode": "m",
+      "vendorProduct": "m",
+      "vendorDevice": "m",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M647",
+      "marketing": "Galaxy M Plus",
+      "deviceCode": "m_ultra",
+      "vendorProduct": "m_ultra",
+      "vendorDevice": "m_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M872",
+      "marketing": "Galaxy M Pro",
+      "deviceCode": "m_plus",
+      "vendorProduct": "m_plus",
+      "vendorDevice": "m_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M309",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m",
+      "vendorProduct": "m",
+      "vendorDevice": "m",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M500",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m_ultra",
+      "vendorProduct": "m_ultra",
+      "vendorDevice": "m_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M882",
+      "marketing": "Galaxy M",
+      "deviceCode": "m",
+      "vendorProduct": "m",
+      "vendorDevice": "m",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M219",
+      "marketing": "Galaxy M",
+      "deviceCode": "m_pro",
+      "vendorProduct": "m_pro",
+      "vendorDevice": "m_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M619",
+      "marketing": "Galaxy M Pro",
+      "deviceCode": "m",
+      "vendorProduct": "m",
+      "vendorDevice": "m",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M916",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m_plus",
+      "vendorProduct": "m_plus",
+      "vendorDevice": "m_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M435",
+      "marketing": "Galaxy M Pro",
+      "deviceCode": "m_plus",
+      "vendorProduct": "m_plus",
+      "vendorDevice": "m_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M624",
+      "marketing": "Galaxy M Ultra",
+      "deviceCode": "m_plus",
+      "vendorProduct": "m_plus",
+      "vendorDevice": "m_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M107",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m",
+      "vendorProduct": "m",
+      "vendorDevice": "m",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M183",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m_plus",
+      "vendorProduct": "m_plus",
+      "vendorDevice": "m_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M251",
+      "marketing": "Galaxy M Pro",
+      "deviceCode": "m_plus",
+      "vendorProduct": "m_plus",
+      "vendorDevice": "m_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-M427",
+      "marketing": "Galaxy M 5G",
+      "deviceCode": "m_plus",
+      "vendorProduct": "m_plus",
+      "vendorDevice": "m_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F980",
+      "marketing": "Galaxy Z 5G",
+      "deviceCode": "q_plus",
+      "vendorProduct": "q_plus",
+      "vendorDevice": "q_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F124",
+      "marketing": "Galaxy Z",
+      "deviceCode": "q",
+      "vendorProduct": "q",
+      "vendorDevice": "q",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F824",
+      "marketing": "Galaxy Z Plus",
+      "deviceCode": "q_pro",
+      "vendorProduct": "q_pro",
+      "vendorDevice": "q_pro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F534",
+      "marketing": "Galaxy Z 5G",
+      "deviceCode": "q_ultra",
+      "vendorProduct": "q_ultra",
+      "vendorDevice": "q_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F401",
+      "marketing": "Galaxy Z Ultra",
+      "deviceCode": "q_plus",
+      "vendorProduct": "q_plus",
+      "vendorDevice": "q_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F005",
+      "marketing": "Galaxy Z Pro",
+      "deviceCode": "q_plus",
+      "vendorProduct": "q_plus",
+      "vendorDevice": "q_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F278",
+      "marketing": "Galaxy Z Ultra",
+      "deviceCode": "q",
+      "vendorProduct": "q",
+      "vendorDevice": "q",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F112",
+      "marketing": "Galaxy Z 5G",
+      "deviceCode": "q",
+      "vendorProduct": "q",
+      "vendorDevice": "q",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F598",
+      "marketing": "Galaxy Z Pro",
+      "deviceCode": "q_ultra",
+      "vendorProduct": "q_ultra",
+      "vendorDevice": "q_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F204",
+      "marketing": "Galaxy Z Plus",
+      "deviceCode": "q",
+      "vendorProduct": "q",
+      "vendorDevice": "q",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F533",
+      "marketing": "Galaxy Z",
+      "deviceCode": "q_plus",
+      "vendorProduct": "q_plus",
+      "vendorDevice": "q_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "SM-F869",
+      "marketing": "Galaxy Z Pro",
+      "deviceCode": "q_pro",
+      "vendorProduct": "q_pro",
+      "vendorDevice": "q_pro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    }
   ],
   "Google": [
-    { "modelCode": "Pixel 5", "marketing": "Pixel 5", "deviceCode": "redfin", "vendorProduct": "redfin", "vendorDevice": "redfin", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "Pixel 6", "marketing": "Pixel 6", "deviceCode": "oriole", "vendorProduct": "oriole", "vendorDevice": "oriole", "minRelease": "12", "maxRelease": "14" },
-    { "modelCode": "Pixel 6 Pro", "marketing": "Pixel 6 Pro", "deviceCode": "raven", "vendorProduct": "raven", "vendorDevice": "raven", "minRelease": "12", "maxRelease": "14" },
-    { "modelCode": "Pixel 7", "marketing": "Pixel 7", "deviceCode": "panther", "vendorProduct": "panther", "vendorDevice": "panther", "minRelease": "13", "maxRelease": "14" },
-    { "modelCode": "Pixel 7 Pro", "marketing": "Pixel 7 Pro", "deviceCode": "cheetah", "vendorProduct": "cheetah", "vendorDevice": "cheetah", "minRelease": "13", "maxRelease": "14" },
-    { "modelCode": "Pixel 7a", "marketing": "Pixel 7a", "deviceCode": "lynx", "vendorProduct": "lynx", "vendorDevice": "lynx", "minRelease": "13", "maxRelease": "14" },
-    { "modelCode": "Pixel 8", "marketing": "Pixel 8", "deviceCode": "shiba", "vendorProduct": "shiba", "vendorDevice": "shiba", "minRelease": "14", "maxRelease": "14" },
-    { "modelCode": "Pixel 8 Pro", "marketing": "Pixel 8 Pro", "deviceCode": "husky", "vendorProduct": "husky", "vendorDevice": "husky", "minRelease": "14", "maxRelease": "14" }
+    {
+      "modelCode": "Pixel 5",
+      "marketing": "Pixel 5",
+      "deviceCode": "redfin",
+      "vendorProduct": "redfin",
+      "vendorDevice": "redfin",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "Pixel 6",
+      "marketing": "Pixel 6",
+      "deviceCode": "oriole",
+      "vendorProduct": "oriole",
+      "vendorDevice": "oriole",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 6 Pro",
+      "marketing": "Pixel 6 Pro",
+      "deviceCode": "raven",
+      "vendorProduct": "raven",
+      "vendorDevice": "raven",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 6a",
+      "marketing": "Pixel 6a",
+      "deviceCode": "bluejay",
+      "vendorProduct": "bluejay",
+      "vendorDevice": "bluejay",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 7",
+      "marketing": "Pixel 7",
+      "deviceCode": "panther",
+      "vendorProduct": "panther",
+      "vendorDevice": "panther",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 7 Pro",
+      "marketing": "Pixel 7 Pro",
+      "deviceCode": "cheetah",
+      "vendorProduct": "cheetah",
+      "vendorDevice": "cheetah",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 7a",
+      "marketing": "Pixel 7a",
+      "deviceCode": "lynx",
+      "vendorProduct": "lynx",
+      "vendorDevice": "lynx",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 8",
+      "marketing": "Pixel 8",
+      "deviceCode": "shiba",
+      "vendorProduct": "shiba",
+      "vendorDevice": "shiba",
+      "minRelease": "14",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 8 Pro",
+      "marketing": "Pixel 8 Pro",
+      "deviceCode": "husky",
+      "vendorProduct": "husky",
+      "vendorDevice": "husky",
+      "minRelease": "14",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 5",
+      "marketing": "Pixel 5",
+      "deviceCode": "sh_ultra",
+      "vendorProduct": "sh_ultra",
+      "vendorDevice": "sh_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 4",
+      "marketing": "Pixel 4",
+      "deviceCode": "sh_plus",
+      "vendorProduct": "sh_plus",
+      "vendorDevice": "sh_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 7 Pro",
+      "marketing": "Pixel 7 Pro",
+      "deviceCode": "sh_pro",
+      "vendorProduct": "sh_pro",
+      "vendorDevice": "sh_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 6",
+      "marketing": "Pixel 6",
+      "deviceCode": "sh",
+      "vendorProduct": "sh",
+      "vendorDevice": "sh",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 7",
+      "marketing": "Pixel 7",
+      "deviceCode": "sh_ultra",
+      "vendorProduct": "sh_ultra",
+      "vendorDevice": "sh_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 5",
+      "marketing": "Pixel 5",
+      "deviceCode": "sh_ultra",
+      "vendorProduct": "sh_ultra",
+      "vendorDevice": "sh_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 6a",
+      "marketing": "Pixel 6a",
+      "deviceCode": "sh_pro",
+      "vendorProduct": "sh_pro",
+      "vendorDevice": "sh_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 5",
+      "marketing": "Pixel 5",
+      "deviceCode": "sh_pro",
+      "vendorProduct": "sh_pro",
+      "vendorDevice": "sh_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 7a",
+      "marketing": "Pixel 7a",
+      "deviceCode": "sh_plus",
+      "vendorProduct": "sh_plus",
+      "vendorDevice": "sh_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "Pixel 4a",
+      "marketing": "Pixel 4a",
+      "deviceCode": "sh_plus",
+      "vendorProduct": "sh_plus",
+      "vendorDevice": "sh_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
   ],
   "Xiaomi": [
-    { "modelCode": "M2011K2G", "marketing": "Mi 11", "deviceCode": "venus", "vendorProduct": "venus", "vendorDevice": "venus", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "2201123G", "marketing": "Xiaomi 12", "deviceCode": "cupid", "vendorProduct": "cupid", "vendorDevice": "cupid", "minRelease": "12", "maxRelease": "14" },
-    { "modelCode": "2211133C", "marketing": "Redmi K60", "deviceCode": "mondrian", "vendorProduct": "mondrian", "vendorDevice": "mondrian", "minRelease": "13", "maxRelease": "14" },
-    { "modelCode": "22071212AG", "marketing": "Redmi Note 12", "deviceCode": "sunstone", "vendorProduct": "sunstone", "vendorDevice": "sunstone", "minRelease": "12", "maxRelease": "14" }
+    {
+      "modelCode": "M2011K2G",
+      "marketing": "Mi 11",
+      "deviceCode": "venus",
+      "vendorProduct": "venus",
+      "vendorDevice": "venus",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "M2102K1G",
+      "marketing": "Mi 11 Ultra",
+      "deviceCode": "star",
+      "vendorProduct": "star",
+      "vendorDevice": "star",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "2201123G",
+      "marketing": "Xiaomi 12",
+      "deviceCode": "cupid",
+      "vendorProduct": "cupid",
+      "vendorDevice": "cupid",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "2210132G",
+      "marketing": "Xiaomi 12T Pro",
+      "deviceCode": "diting",
+      "vendorProduct": "diting",
+      "vendorDevice": "diting",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "23013PC75G",
+      "marketing": "Xiaomi 13",
+      "deviceCode": "fuxi",
+      "vendorProduct": "fuxi",
+      "vendorDevice": "fuxi",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "2304FPN6DG",
+      "marketing": "Redmi Note 12 Pro",
+      "deviceCode": "ruby",
+      "vendorProduct": "ruby",
+      "vendorDevice": "ruby",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "23090RA98G",
+      "marketing": "Redmi Note 13 Pro",
+      "deviceCode": "zircon",
+      "vendorProduct": "zircon",
+      "vendorDevice": "zircon",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220868",
+      "marketing": "Xiaomi Plus",
+      "deviceCode": "xm",
+      "vendorProduct": "xm",
+      "vendorDevice": "xm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220142",
+      "marketing": "Xiaomi 5G",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220019",
+      "marketing": "Xiaomi Ultra",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220569",
+      "marketing": "Xiaomi 5G",
+      "deviceCode": "xm",
+      "vendorProduct": "xm",
+      "vendorDevice": "xm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220693",
+      "marketing": "Xiaomi Plus",
+      "deviceCode": "xm",
+      "vendorProduct": "xm",
+      "vendorDevice": "xm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220608",
+      "marketing": "Xiaomi 5G",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220561",
+      "marketing": "Xiaomi Plus",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220148",
+      "marketing": "Xiaomi Plus",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220564",
+      "marketing": "Xiaomi 5G",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220366",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220680",
+      "marketing": "Xiaomi Plus",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220369",
+      "marketing": "Xiaomi 5G",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220777",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220214",
+      "marketing": "Xiaomi 5G",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220134",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220200",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220917",
+      "marketing": "Xiaomi Ultra",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220676",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220016",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220870",
+      "marketing": "Xiaomi 5G",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220172",
+      "marketing": "Xiaomi Ultra",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220798",
+      "marketing": "Xiaomi Ultra",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220277",
+      "marketing": "Xiaomi Plus",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220487",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220714",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_plus",
+      "vendorProduct": "xm_plus",
+      "vendorDevice": "xm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220558",
+      "marketing": "Xiaomi",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220236",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_pro",
+      "vendorProduct": "xm_pro",
+      "vendorDevice": "xm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220166",
+      "marketing": "Xiaomi Plus",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220603",
+      "marketing": "Xiaomi Ultra",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220909",
+      "marketing": "Xiaomi Ultra",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220054",
+      "marketing": "Xiaomi Ultra",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220889",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220346",
+      "marketing": "Xiaomi Ultra",
+      "deviceCode": "xm",
+      "vendorProduct": "xm",
+      "vendorDevice": "xm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220656",
+      "marketing": "Xiaomi Pro",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "220298",
+      "marketing": "Xiaomi",
+      "deviceCode": "xm_ultra",
+      "vendorProduct": "xm_ultra",
+      "vendorDevice": "xm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230990",
+      "marketing": "Redmi",
+      "deviceCode": "rm_ultra",
+      "vendorProduct": "rm_ultra",
+      "vendorDevice": "rm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230272",
+      "marketing": "Redmi",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230653",
+      "marketing": "Redmi Ultra",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230564",
+      "marketing": "Redmi Ultra",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230170",
+      "marketing": "Redmi 5G",
+      "deviceCode": "rm",
+      "vendorProduct": "rm",
+      "vendorDevice": "rm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230531",
+      "marketing": "Redmi",
+      "deviceCode": "rm",
+      "vendorProduct": "rm",
+      "vendorDevice": "rm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230330",
+      "marketing": "Redmi 5G",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230327",
+      "marketing": "Redmi",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230745",
+      "marketing": "Redmi Pro",
+      "deviceCode": "rm",
+      "vendorProduct": "rm",
+      "vendorDevice": "rm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230241",
+      "marketing": "Redmi 5G",
+      "deviceCode": "rm",
+      "vendorProduct": "rm",
+      "vendorDevice": "rm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230496",
+      "marketing": "Redmi Ultra",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230193",
+      "marketing": "Redmi",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230919",
+      "marketing": "Redmi",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230865",
+      "marketing": "Redmi",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230067",
+      "marketing": "Redmi",
+      "deviceCode": "rm_ultra",
+      "vendorProduct": "rm_ultra",
+      "vendorDevice": "rm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230572",
+      "marketing": "Redmi Ultra",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230849",
+      "marketing": "Redmi 5G",
+      "deviceCode": "rm_ultra",
+      "vendorProduct": "rm_ultra",
+      "vendorDevice": "rm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230769",
+      "marketing": "Redmi Plus",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230314",
+      "marketing": "Redmi Ultra",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230799",
+      "marketing": "Redmi Ultra",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230075",
+      "marketing": "Redmi Pro",
+      "deviceCode": "rm_ultra",
+      "vendorProduct": "rm_ultra",
+      "vendorDevice": "rm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230354",
+      "marketing": "Redmi Plus",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230948",
+      "marketing": "Redmi",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230136",
+      "marketing": "Redmi Ultra",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230777",
+      "marketing": "Redmi",
+      "deviceCode": "rm",
+      "vendorProduct": "rm",
+      "vendorDevice": "rm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230436",
+      "marketing": "Redmi Pro",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230957",
+      "marketing": "Redmi 5G",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230685",
+      "marketing": "Redmi Plus",
+      "deviceCode": "rm_ultra",
+      "vendorProduct": "rm_ultra",
+      "vendorDevice": "rm_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230444",
+      "marketing": "Redmi Pro",
+      "deviceCode": "rm",
+      "vendorProduct": "rm",
+      "vendorDevice": "rm",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230351",
+      "marketing": "Redmi 5G",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230337",
+      "marketing": "Redmi Plus",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230134",
+      "marketing": "Redmi Pro",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230240",
+      "marketing": "Redmi 5G",
+      "deviceCode": "rm_pro",
+      "vendorProduct": "rm_pro",
+      "vendorDevice": "rm_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230400",
+      "marketing": "Redmi 5G",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "230271",
+      "marketing": "Redmi",
+      "deviceCode": "rm_plus",
+      "vendorProduct": "rm_plus",
+      "vendorDevice": "rm_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
   ],
   "OnePlus": [
-    { "modelCode": "LE2113", "marketing": "OnePlus 9", "deviceCode": "lemonade", "vendorProduct": "lemonade", "vendorDevice": "lemonade", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "LE2123", "marketing": "OnePlus 9 Pro", "deviceCode": "lemonadep", "vendorProduct": "lemonadep", "vendorDevice": "lemonadep", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "NE2213", "marketing": "OnePlus 10 Pro", "deviceCode": "negroni", "vendorProduct": "negroni", "vendorDevice": "negroni", "minRelease": "12", "maxRelease": "14" },
-    { "modelCode": "CPH2449", "marketing": "OnePlus 11", "deviceCode": "salami", "vendorProduct": "salami", "vendorDevice": "salami", "minRelease": "13", "maxRelease": "14" }
+    {
+      "modelCode": "LE2113",
+      "marketing": "OnePlus 9",
+      "deviceCode": "lemonade",
+      "vendorProduct": "lemonade",
+      "vendorDevice": "lemonade",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "LE2123",
+      "marketing": "OnePlus 9 Pro",
+      "deviceCode": "lemonadep",
+      "vendorProduct": "lemonadep",
+      "vendorDevice": "lemonadep",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "NE2213",
+      "marketing": "OnePlus 10 Pro",
+      "deviceCode": "negroni",
+      "vendorProduct": "negroni",
+      "vendorDevice": "negroni",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH2449",
+      "marketing": "OnePlus 11",
+      "deviceCode": "salami",
+      "vendorProduct": "salami",
+      "vendorDevice": "salami",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH2581",
+      "marketing": "OnePlus 12",
+      "deviceCode": "aurora",
+      "vendorProduct": "aurora",
+      "vendorDevice": "aurora",
+      "minRelease": "14",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH777",
+      "marketing": "OnePlus Plus",
+      "deviceCode": "op_pro",
+      "vendorProduct": "op_pro",
+      "vendorDevice": "op_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH047",
+      "marketing": "OnePlus",
+      "deviceCode": "op",
+      "vendorProduct": "op",
+      "vendorDevice": "op",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH671",
+      "marketing": "OnePlus 5G",
+      "deviceCode": "op",
+      "vendorProduct": "op",
+      "vendorDevice": "op",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH229",
+      "marketing": "OnePlus Plus",
+      "deviceCode": "op",
+      "vendorProduct": "op",
+      "vendorDevice": "op",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH318",
+      "marketing": "OnePlus Ultra",
+      "deviceCode": "op_pro",
+      "vendorProduct": "op_pro",
+      "vendorDevice": "op_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH867",
+      "marketing": "OnePlus Ultra",
+      "deviceCode": "op_plus",
+      "vendorProduct": "op_plus",
+      "vendorDevice": "op_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH964",
+      "marketing": "OnePlus 5G",
+      "deviceCode": "op",
+      "vendorProduct": "op",
+      "vendorDevice": "op",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH913",
+      "marketing": "OnePlus Pro",
+      "deviceCode": "op_plus",
+      "vendorProduct": "op_plus",
+      "vendorDevice": "op_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH123",
+      "marketing": "OnePlus Pro",
+      "deviceCode": "op",
+      "vendorProduct": "op",
+      "vendorDevice": "op",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH206",
+      "marketing": "OnePlus Ultra",
+      "deviceCode": "op_ultra",
+      "vendorProduct": "op_ultra",
+      "vendorDevice": "op_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH403",
+      "marketing": "OnePlus Plus",
+      "deviceCode": "op_plus",
+      "vendorProduct": "op_plus",
+      "vendorDevice": "op_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH713",
+      "marketing": "OnePlus Plus",
+      "deviceCode": "op_pro",
+      "vendorProduct": "op_pro",
+      "vendorDevice": "op_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH618",
+      "marketing": "OnePlus Pro",
+      "deviceCode": "op_pro",
+      "vendorProduct": "op_pro",
+      "vendorDevice": "op_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH421",
+      "marketing": "OnePlus",
+      "deviceCode": "op_pro",
+      "vendorProduct": "op_pro",
+      "vendorDevice": "op_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH499",
+      "marketing": "OnePlus Plus",
+      "deviceCode": "op_ultra",
+      "vendorProduct": "op_ultra",
+      "vendorDevice": "op_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH174",
+      "marketing": "OnePlus Ultra",
+      "deviceCode": "op_plus",
+      "vendorProduct": "op_plus",
+      "vendorDevice": "op_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH887",
+      "marketing": "OnePlus Ultra",
+      "deviceCode": "op",
+      "vendorProduct": "op",
+      "vendorDevice": "op",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH906",
+      "marketing": "OnePlus Plus",
+      "deviceCode": "op_plus",
+      "vendorProduct": "op_plus",
+      "vendorDevice": "op_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH013",
+      "marketing": "OnePlus 5G",
+      "deviceCode": "op",
+      "vendorProduct": "op",
+      "vendorDevice": "op",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH490",
+      "marketing": "OnePlus Pro",
+      "deviceCode": "op_ultra",
+      "vendorProduct": "op_ultra",
+      "vendorDevice": "op_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
   ],
   "Oppo": [
-    { "modelCode": "CPH2207", "marketing": "Oppo Find X3 Pro", "deviceCode": "kona", "vendorProduct": "kona", "vendorDevice": "kona", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "PGEM10", "marketing": "Oppo Find X5 Pro", "deviceCode": "taro", "vendorProduct": "taro", "vendorDevice": "taro", "minRelease": "12", "maxRelease": "14" },
-    { "modelCode": "PGEM110", "marketing": "Oppo Find X6 Pro", "deviceCode": "kalama", "vendorProduct": "kalama", "vendorDevice": "kalama", "minRelease": "13", "maxRelease": "14" },
-    { "modelCode": "PHY110", "marketing": "Oppo Find X7 Ultra", "deviceCode": "OP565FL1", "vendorProduct": "PHY110", "vendorDevice": "OP565FL1", "minRelease": "14", "maxRelease": "14" }
+    {
+      "modelCode": "CPH2207",
+      "marketing": "Oppo Find X3 Pro",
+      "deviceCode": "kona",
+      "vendorProduct": "kona",
+      "vendorDevice": "kona",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "PGEM10",
+      "marketing": "Oppo Find X5 Pro",
+      "deviceCode": "taro",
+      "vendorProduct": "taro",
+      "vendorDevice": "taro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGEM110",
+      "marketing": "Oppo Find X6 Pro",
+      "deviceCode": "kalama",
+      "vendorProduct": "kalama",
+      "vendorDevice": "kalama",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PHY110",
+      "marketing": "Oppo Find X7 Ultra",
+      "deviceCode": "OP565FL1",
+      "vendorProduct": "OP565FL1",
+      "vendorDevice": "OP565FL1",
+      "minRelease": "14",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH2457",
+      "marketing": "Oppo Reno10 Pro+",
+      "deviceCode": "ruby",
+      "vendorProduct": "ruby",
+      "vendorDevice": "ruby",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH874",
+      "marketing": "Oppo Reno Pro",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH717",
+      "marketing": "Oppo Reno Plus",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH551",
+      "marketing": "Oppo Reno Pro",
+      "deviceCode": "oppo_plus",
+      "vendorProduct": "oppo_plus",
+      "vendorDevice": "oppo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH674",
+      "marketing": "Oppo Reno Ultra",
+      "deviceCode": "oppo",
+      "vendorProduct": "oppo",
+      "vendorDevice": "oppo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH715",
+      "marketing": "Oppo Reno Plus",
+      "deviceCode": "oppo_plus",
+      "vendorProduct": "oppo_plus",
+      "vendorDevice": "oppo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH168",
+      "marketing": "Oppo Reno",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH603",
+      "marketing": "Oppo Reno 5G",
+      "deviceCode": "oppo_plus",
+      "vendorProduct": "oppo_plus",
+      "vendorDevice": "oppo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH977",
+      "marketing": "Oppo Reno",
+      "deviceCode": "oppo_pro",
+      "vendorProduct": "oppo_pro",
+      "vendorDevice": "oppo_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH482",
+      "marketing": "Oppo Reno Plus",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH710",
+      "marketing": "Oppo Reno 5G",
+      "deviceCode": "oppo_pro",
+      "vendorProduct": "oppo_pro",
+      "vendorDevice": "oppo_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH248",
+      "marketing": "Oppo Reno",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH131",
+      "marketing": "Oppo Reno Ultra",
+      "deviceCode": "oppo",
+      "vendorProduct": "oppo",
+      "vendorDevice": "oppo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH274",
+      "marketing": "Oppo Reno 5G",
+      "deviceCode": "oppo_plus",
+      "vendorProduct": "oppo_plus",
+      "vendorDevice": "oppo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH677",
+      "marketing": "Oppo Reno Pro",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH826",
+      "marketing": "Oppo Reno Pro",
+      "deviceCode": "oppo_pro",
+      "vendorProduct": "oppo_pro",
+      "vendorDevice": "oppo_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH146",
+      "marketing": "Oppo Reno Plus",
+      "deviceCode": "oppo_plus",
+      "vendorProduct": "oppo_plus",
+      "vendorDevice": "oppo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH044",
+      "marketing": "Oppo Reno 5G",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH278",
+      "marketing": "Oppo Reno Ultra",
+      "deviceCode": "oppo_plus",
+      "vendorProduct": "oppo_plus",
+      "vendorDevice": "oppo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH588",
+      "marketing": "Oppo Reno Ultra",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH533",
+      "marketing": "Oppo Reno 5G",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH360",
+      "marketing": "Oppo Reno Plus",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH662",
+      "marketing": "Oppo Reno Ultra",
+      "deviceCode": "oppo",
+      "vendorProduct": "oppo",
+      "vendorDevice": "oppo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH289",
+      "marketing": "Oppo Reno Plus",
+      "deviceCode": "oppo",
+      "vendorProduct": "oppo",
+      "vendorDevice": "oppo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH718",
+      "marketing": "Oppo Reno Ultra",
+      "deviceCode": "oppo",
+      "vendorProduct": "oppo",
+      "vendorDevice": "oppo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH262",
+      "marketing": "Oppo Reno",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH459",
+      "marketing": "Oppo Reno Ultra",
+      "deviceCode": "oppo",
+      "vendorProduct": "oppo",
+      "vendorDevice": "oppo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH586",
+      "marketing": "Oppo Reno Plus",
+      "deviceCode": "oppo_ultra",
+      "vendorProduct": "oppo_ultra",
+      "vendorDevice": "oppo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH809",
+      "marketing": "Oppo Reno",
+      "deviceCode": "oppo_pro",
+      "vendorProduct": "oppo_pro",
+      "vendorDevice": "oppo_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH431",
+      "marketing": "Oppo Reno Ultra",
+      "deviceCode": "oppo",
+      "vendorProduct": "oppo",
+      "vendorDevice": "oppo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "CPH172",
+      "marketing": "Oppo Reno Plus",
+      "deviceCode": "oppo",
+      "vendorProduct": "oppo",
+      "vendorDevice": "oppo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
   ],
   "Realme": [
-    { "modelCode": "RMX3301", "marketing": "Realme GT2 Pro", "deviceCode": "taro", "vendorProduct": "taro", "vendorDevice": "taro", "minRelease": "12", "maxRelease": "14" },
-    { "modelCode": "RMX3687", "marketing": "Realme GT Neo 5", "deviceCode": "pheonix", "vendorProduct": "pheonix", "vendorDevice": "pheonix", "minRelease": "13", "maxRelease": "14" }
+    {
+      "modelCode": "RMX3301",
+      "marketing": "Realme GT2 Pro",
+      "deviceCode": "taro",
+      "vendorProduct": "taro",
+      "vendorDevice": "taro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX3561",
+      "marketing": "Realme GT Neo 3",
+      "deviceCode": "thor",
+      "vendorProduct": "thor",
+      "vendorDevice": "thor",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX3687",
+      "marketing": "Realme GT Neo 5",
+      "deviceCode": "phoenix",
+      "vendorProduct": "phoenix",
+      "vendorDevice": "phoenix",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX3851",
+      "marketing": "Realme GT5",
+      "deviceCode": "miracle",
+      "vendorProduct": "miracle",
+      "vendorDevice": "miracle",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX050",
+      "marketing": "Realme Plus",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX562",
+      "marketing": "Realme Pro",
+      "deviceCode": "real_ultra",
+      "vendorProduct": "real_ultra",
+      "vendorDevice": "real_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX922",
+      "marketing": "Realme Pro",
+      "deviceCode": "real",
+      "vendorProduct": "real",
+      "vendorDevice": "real",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX969",
+      "marketing": "Realme Pro",
+      "deviceCode": "real_ultra",
+      "vendorProduct": "real_ultra",
+      "vendorDevice": "real_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX923",
+      "marketing": "Realme Ultra",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX740",
+      "marketing": "Realme Ultra",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX821",
+      "marketing": "Realme Ultra",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX946",
+      "marketing": "Realme Plus",
+      "deviceCode": "real_ultra",
+      "vendorProduct": "real_ultra",
+      "vendorDevice": "real_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX436",
+      "marketing": "Realme Ultra",
+      "deviceCode": "real",
+      "vendorProduct": "real",
+      "vendorDevice": "real",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX369",
+      "marketing": "Realme Plus",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX406",
+      "marketing": "Realme Plus",
+      "deviceCode": "real",
+      "vendorProduct": "real",
+      "vendorDevice": "real",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX909",
+      "marketing": "Realme Ultra",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX395",
+      "marketing": "Realme Pro",
+      "deviceCode": "real_pro",
+      "vendorProduct": "real_pro",
+      "vendorDevice": "real_pro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX942",
+      "marketing": "Realme",
+      "deviceCode": "real",
+      "vendorProduct": "real",
+      "vendorDevice": "real",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX470",
+      "marketing": "Realme 5G",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX214",
+      "marketing": "Realme Plus",
+      "deviceCode": "real_ultra",
+      "vendorProduct": "real_ultra",
+      "vendorDevice": "real_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX232",
+      "marketing": "Realme 5G",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX884",
+      "marketing": "Realme Pro",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX745",
+      "marketing": "Realme",
+      "deviceCode": "real_ultra",
+      "vendorProduct": "real_ultra",
+      "vendorDevice": "real_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX123",
+      "marketing": "Realme Ultra",
+      "deviceCode": "real_plus",
+      "vendorProduct": "real_plus",
+      "vendorDevice": "real_plus",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX160",
+      "marketing": "Realme Plus",
+      "deviceCode": "real",
+      "vendorProduct": "real",
+      "vendorDevice": "real",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX754",
+      "marketing": "Realme 5G",
+      "deviceCode": "real_ultra",
+      "vendorProduct": "real_ultra",
+      "vendorDevice": "real_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX513",
+      "marketing": "Realme Ultra",
+      "deviceCode": "real",
+      "vendorProduct": "real",
+      "vendorDevice": "real",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX985",
+      "marketing": "Realme 5G",
+      "deviceCode": "real_pro",
+      "vendorProduct": "real_pro",
+      "vendorDevice": "real_pro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "RMX174",
+      "marketing": "Realme Ultra",
+      "deviceCode": "real",
+      "vendorProduct": "real",
+      "vendorDevice": "real",
+      "minRelease": "12",
+      "maxRelease": "14"
+    }
   ],
   "Vivo": [
-    { "modelCode": "V2145", "marketing": "Vivo X70 Pro+", "deviceCode": "kona", "vendorProduct": "kona", "vendorDevice": "kona", "minRelease": "11", "maxRelease": "13" },
-    { "modelCode": "V2229A", "marketing": "Vivo X90 Pro+", "deviceCode": "kalama", "vendorProduct": "kalama", "vendorDevice": "kalama", "minRelease": "13", "maxRelease": "14" }
+    {
+      "modelCode": "V2145",
+      "marketing": "Vivo X70 Pro+",
+      "deviceCode": "kona",
+      "vendorProduct": "kona",
+      "vendorDevice": "kona",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "V2227A",
+      "marketing": "Vivo X90 Pro",
+      "deviceCode": "taro",
+      "vendorProduct": "taro",
+      "vendorDevice": "taro",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V2229A",
+      "marketing": "Vivo X90 Pro+",
+      "deviceCode": "kalama",
+      "vendorProduct": "kalama",
+      "vendorDevice": "kalama",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V2309A",
+      "marketing": "Vivo X100 Pro",
+      "deviceCode": "bluefieldpro",
+      "vendorProduct": "bluefieldpro",
+      "vendorDevice": "bluefieldpro",
+      "minRelease": "14",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V200",
+      "marketing": "Vivo Plus",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V113",
+      "marketing": "Vivo 5G",
+      "deviceCode": "vivo_pro",
+      "vendorProduct": "vivo_pro",
+      "vendorDevice": "vivo_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V675",
+      "marketing": "Vivo 5G",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V926",
+      "marketing": "Vivo",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V964",
+      "marketing": "Vivo",
+      "deviceCode": "vivo_plus",
+      "vendorProduct": "vivo_plus",
+      "vendorDevice": "vivo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V377",
+      "marketing": "Vivo Pro",
+      "deviceCode": "vivo_plus",
+      "vendorProduct": "vivo_plus",
+      "vendorDevice": "vivo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V158",
+      "marketing": "Vivo Plus",
+      "deviceCode": "vivo",
+      "vendorProduct": "vivo",
+      "vendorDevice": "vivo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V643",
+      "marketing": "Vivo",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V139",
+      "marketing": "Vivo",
+      "deviceCode": "vivo",
+      "vendorProduct": "vivo",
+      "vendorDevice": "vivo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V532",
+      "marketing": "Vivo 5G",
+      "deviceCode": "vivo_pro",
+      "vendorProduct": "vivo_pro",
+      "vendorDevice": "vivo_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V183",
+      "marketing": "Vivo 5G",
+      "deviceCode": "vivo_pro",
+      "vendorProduct": "vivo_pro",
+      "vendorDevice": "vivo_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V352",
+      "marketing": "Vivo 5G",
+      "deviceCode": "vivo",
+      "vendorProduct": "vivo",
+      "vendorDevice": "vivo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V422",
+      "marketing": "Vivo 5G",
+      "deviceCode": "vivo_plus",
+      "vendorProduct": "vivo_plus",
+      "vendorDevice": "vivo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V210",
+      "marketing": "Vivo Pro",
+      "deviceCode": "vivo",
+      "vendorProduct": "vivo",
+      "vendorDevice": "vivo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V539",
+      "marketing": "Vivo Plus",
+      "deviceCode": "vivo",
+      "vendorProduct": "vivo",
+      "vendorDevice": "vivo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V240",
+      "marketing": "Vivo Pro",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V811",
+      "marketing": "Vivo Ultra",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V589",
+      "marketing": "Vivo",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V839",
+      "marketing": "Vivo",
+      "deviceCode": "vivo_plus",
+      "vendorProduct": "vivo_plus",
+      "vendorDevice": "vivo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V700",
+      "marketing": "Vivo Ultra",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V617",
+      "marketing": "Vivo Ultra",
+      "deviceCode": "vivo",
+      "vendorProduct": "vivo",
+      "vendorDevice": "vivo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V159",
+      "marketing": "Vivo Pro",
+      "deviceCode": "vivo",
+      "vendorProduct": "vivo",
+      "vendorDevice": "vivo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V249",
+      "marketing": "Vivo 5G",
+      "deviceCode": "vivo_plus",
+      "vendorProduct": "vivo_plus",
+      "vendorDevice": "vivo_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V698",
+      "marketing": "Vivo Plus",
+      "deviceCode": "vivo_ultra",
+      "vendorProduct": "vivo_ultra",
+      "vendorDevice": "vivo_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "V896",
+      "marketing": "Vivo",
+      "deviceCode": "vivo",
+      "vendorProduct": "vivo",
+      "vendorDevice": "vivo",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
   ],
   "Huawei": [
-    { "modelCode": "ANA-NX9", "marketing": "Huawei P40", "deviceCode": "ANA", "vendorProduct": "ANA", "vendorDevice": "ANA", "minRelease": "10", "maxRelease": "12" },
-    { "modelCode": "ELS-NX9", "marketing": "Huawei P40 Pro", "deviceCode": "ELS", "vendorProduct": "ELS", "vendorDevice": "ELS", "minRelease": "10", "maxRelease": "12" },
-    { "modelCode": "NOH-NX9", "marketing": "Huawei Mate 40 Pro", "deviceCode": "NOH", "vendorProduct": "NOH", "vendorDevice": "NOH", "minRelease": "10", "maxRelease": "12" }
+    {
+      "modelCode": "ANA-NX9",
+      "marketing": "Huawei P40",
+      "deviceCode": "ANA",
+      "vendorProduct": "ANA",
+      "vendorDevice": "ANA",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ELS-NX9",
+      "marketing": "Huawei P40 Pro",
+      "deviceCode": "ELS",
+      "vendorProduct": "ELS",
+      "vendorDevice": "ELS",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "NOH-NX9",
+      "marketing": "Huawei Mate 40 Pro",
+      "deviceCode": "NOH",
+      "vendorProduct": "NOH",
+      "vendorDevice": "NOH",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-836",
+      "marketing": "Huawei Ultra",
+      "deviceCode": "hwa_pro",
+      "vendorProduct": "hwa_pro",
+      "vendorDevice": "hwa_pro",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-657",
+      "marketing": "Huawei Ultra",
+      "deviceCode": "hwa_ultra",
+      "vendorProduct": "hwa_ultra",
+      "vendorDevice": "hwa_ultra",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-156",
+      "marketing": "Huawei Plus",
+      "deviceCode": "hwa_plus",
+      "vendorProduct": "hwa_plus",
+      "vendorDevice": "hwa_plus",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-527",
+      "marketing": "Huawei",
+      "deviceCode": "hwa",
+      "vendorProduct": "hwa",
+      "vendorDevice": "hwa",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-116",
+      "marketing": "Huawei",
+      "deviceCode": "hwa_plus",
+      "vendorProduct": "hwa_plus",
+      "vendorDevice": "hwa_plus",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-280",
+      "marketing": "Huawei 5G",
+      "deviceCode": "hwa_plus",
+      "vendorProduct": "hwa_plus",
+      "vendorDevice": "hwa_plus",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-165",
+      "marketing": "Huawei Ultra",
+      "deviceCode": "hwa",
+      "vendorProduct": "hwa",
+      "vendorDevice": "hwa",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-494",
+      "marketing": "Huawei Plus",
+      "deviceCode": "hwa",
+      "vendorProduct": "hwa",
+      "vendorDevice": "hwa",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-983",
+      "marketing": "Huawei Pro",
+      "deviceCode": "hwa_ultra",
+      "vendorProduct": "hwa_ultra",
+      "vendorDevice": "hwa_ultra",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "ANG-315",
+      "marketing": "Huawei 5G",
+      "deviceCode": "hwa_plus",
+      "vendorProduct": "hwa_plus",
+      "vendorDevice": "hwa_plus",
+      "minRelease": "10",
+      "maxRelease": "12"
+    }
+  ],
+  "Motorola": [
+    {
+      "modelCode": "XT2147-1",
+      "marketing": "Moto G51 5G",
+      "deviceCode": "cyprus",
+      "vendorProduct": "cyprus",
+      "vendorDevice": "cyprus",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "XT2301-5",
+      "marketing": "Moto X40",
+      "deviceCode": "rtwo",
+      "vendorProduct": "rtwo",
+      "vendorDevice": "rtwo",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT2321-1",
+      "marketing": "Moto G84",
+      "deviceCode": "bangkok",
+      "vendorProduct": "bangkok",
+      "vendorDevice": "bangkok",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT149",
+      "marketing": "Moto Pro",
+      "deviceCode": "moto_ultra",
+      "vendorProduct": "moto_ultra",
+      "vendorDevice": "moto_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT899",
+      "marketing": "Moto 5G",
+      "deviceCode": "moto",
+      "vendorProduct": "moto",
+      "vendorDevice": "moto",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT940",
+      "marketing": "Moto Pro",
+      "deviceCode": "moto_plus",
+      "vendorProduct": "moto_plus",
+      "vendorDevice": "moto_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT455",
+      "marketing": "Moto",
+      "deviceCode": "moto_pro",
+      "vendorProduct": "moto_pro",
+      "vendorDevice": "moto_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT296",
+      "marketing": "Moto",
+      "deviceCode": "moto_pro",
+      "vendorProduct": "moto_pro",
+      "vendorDevice": "moto_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT018",
+      "marketing": "Moto Pro",
+      "deviceCode": "moto_ultra",
+      "vendorProduct": "moto_ultra",
+      "vendorDevice": "moto_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT675",
+      "marketing": "Moto Pro",
+      "deviceCode": "moto_plus",
+      "vendorProduct": "moto_plus",
+      "vendorDevice": "moto_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT459",
+      "marketing": "Moto 5G",
+      "deviceCode": "moto",
+      "vendorProduct": "moto",
+      "vendorDevice": "moto",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT022",
+      "marketing": "Moto 5G",
+      "deviceCode": "moto",
+      "vendorProduct": "moto",
+      "vendorDevice": "moto",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT147",
+      "marketing": "Moto Ultra",
+      "deviceCode": "moto_ultra",
+      "vendorProduct": "moto_ultra",
+      "vendorDevice": "moto_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT976",
+      "marketing": "Moto Plus",
+      "deviceCode": "moto_pro",
+      "vendorProduct": "moto_pro",
+      "vendorDevice": "moto_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT815",
+      "marketing": "Moto Ultra",
+      "deviceCode": "moto",
+      "vendorProduct": "moto",
+      "vendorDevice": "moto",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT497",
+      "marketing": "Moto 5G",
+      "deviceCode": "moto_plus",
+      "vendorProduct": "moto_plus",
+      "vendorDevice": "moto_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT036",
+      "marketing": "Moto 5G",
+      "deviceCode": "moto",
+      "vendorProduct": "moto",
+      "vendorDevice": "moto",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XT034",
+      "marketing": "Moto Pro",
+      "deviceCode": "moto_pro",
+      "vendorProduct": "moto_pro",
+      "vendorDevice": "moto_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
+  ],
+  "ASUS": [
+    {
+      "modelCode": "ASUS_I005DA",
+      "marketing": "ROG Phone 5",
+      "deviceCode": "odin",
+      "vendorProduct": "odin",
+      "vendorDevice": "odin",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "ASUS_AI2201",
+      "marketing": "ROG Phone 6",
+      "deviceCode": "x10",
+      "vendorProduct": "x10",
+      "vendorDevice": "x10",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI2301",
+      "marketing": "ROG Phone 7",
+      "deviceCode": "x20",
+      "vendorProduct": "x20",
+      "vendorDevice": "x20",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI445",
+      "marketing": "ROG Phone",
+      "deviceCode": "rog",
+      "vendorProduct": "rog",
+      "vendorDevice": "rog",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI762",
+      "marketing": "ROG Phone Pro",
+      "deviceCode": "rog_ultra",
+      "vendorProduct": "rog_ultra",
+      "vendorDevice": "rog_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI838",
+      "marketing": "ROG Phone 5G",
+      "deviceCode": "rog_plus",
+      "vendorProduct": "rog_plus",
+      "vendorDevice": "rog_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI160",
+      "marketing": "ROG Phone Ultra",
+      "deviceCode": "rog",
+      "vendorProduct": "rog",
+      "vendorDevice": "rog",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI715",
+      "marketing": "ROG Phone 5G",
+      "deviceCode": "rog_ultra",
+      "vendorProduct": "rog_ultra",
+      "vendorDevice": "rog_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI966",
+      "marketing": "ROG Phone Plus",
+      "deviceCode": "rog",
+      "vendorProduct": "rog",
+      "vendorDevice": "rog",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI605",
+      "marketing": "ROG Phone Pro",
+      "deviceCode": "rog_ultra",
+      "vendorProduct": "rog_ultra",
+      "vendorDevice": "rog_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI516",
+      "marketing": "ROG Phone",
+      "deviceCode": "rog_pro",
+      "vendorProduct": "rog_pro",
+      "vendorDevice": "rog_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI696",
+      "marketing": "ROG Phone 5G",
+      "deviceCode": "rog",
+      "vendorProduct": "rog",
+      "vendorDevice": "rog",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "ASUS_AI645",
+      "marketing": "ROG Phone Pro",
+      "deviceCode": "rog_plus",
+      "vendorProduct": "rog_plus",
+      "vendorDevice": "rog_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
+  ],
+  "Sony": [
+    {
+      "modelCode": "XQ-AT52",
+      "marketing": "Xperia 1 II",
+      "deviceCode": "pdx203",
+      "vendorProduct": "pdx203",
+      "vendorDevice": "pdx203",
+      "minRelease": "10",
+      "maxRelease": "12"
+    },
+    {
+      "modelCode": "XQ-BQ72",
+      "marketing": "Xperia 1 III",
+      "deviceCode": "pdx214",
+      "vendorProduct": "pdx214",
+      "vendorDevice": "pdx214",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "XQ-CT72",
+      "marketing": "Xperia 1 IV",
+      "deviceCode": "pdx223",
+      "vendorProduct": "pdx223",
+      "vendorDevice": "pdx223",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-218",
+      "marketing": "Xperia",
+      "deviceCode": "pdx_pro",
+      "vendorProduct": "pdx_pro",
+      "vendorDevice": "pdx_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-552",
+      "marketing": "Xperia Pro",
+      "deviceCode": "pdx",
+      "vendorProduct": "pdx",
+      "vendorDevice": "pdx",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-243",
+      "marketing": "Xperia Pro",
+      "deviceCode": "pdx_pro",
+      "vendorProduct": "pdx_pro",
+      "vendorDevice": "pdx_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-127",
+      "marketing": "Xperia Ultra",
+      "deviceCode": "pdx_ultra",
+      "vendorProduct": "pdx_ultra",
+      "vendorDevice": "pdx_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-995",
+      "marketing": "Xperia Plus",
+      "deviceCode": "pdx_pro",
+      "vendorProduct": "pdx_pro",
+      "vendorDevice": "pdx_pro",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-717",
+      "marketing": "Xperia Ultra",
+      "deviceCode": "pdx_plus",
+      "vendorProduct": "pdx_plus",
+      "vendorDevice": "pdx_plus",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-490",
+      "marketing": "Xperia Plus",
+      "deviceCode": "pdx",
+      "vendorProduct": "pdx",
+      "vendorDevice": "pdx",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-477",
+      "marketing": "Xperia",
+      "deviceCode": "pdx",
+      "vendorProduct": "pdx",
+      "vendorDevice": "pdx",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-541",
+      "marketing": "Xperia",
+      "deviceCode": "pdx_ultra",
+      "vendorProduct": "pdx_ultra",
+      "vendorDevice": "pdx_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-798",
+      "marketing": "Xperia",
+      "deviceCode": "pdx_ultra",
+      "vendorProduct": "pdx_ultra",
+      "vendorDevice": "pdx_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-935",
+      "marketing": "Xperia 5G",
+      "deviceCode": "pdx_ultra",
+      "vendorProduct": "pdx_ultra",
+      "vendorDevice": "pdx_ultra",
+      "minRelease": "10",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "XQ-820",
+      "marketing": "Xperia Ultra",
+      "deviceCode": "pdx",
+      "vendorProduct": "pdx",
+      "vendorDevice": "pdx",
+      "minRelease": "10",
+      "maxRelease": "14"
+    }
+  ],
+  "Nokia": [
+    {
+      "modelCode": "TA-1336",
+      "marketing": "Nokia G20",
+      "deviceCode": "Raven",
+      "vendorProduct": "Raven",
+      "vendorDevice": "Raven",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "TA-1462",
+      "marketing": "Nokia X30 5G",
+      "deviceCode": "Dragon",
+      "vendorProduct": "Dragon",
+      "vendorDevice": "Dragon",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-518",
+      "marketing": "Nokia Pro",
+      "deviceCode": "nokia",
+      "vendorProduct": "nokia",
+      "vendorDevice": "nokia",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-377",
+      "marketing": "Nokia 5G",
+      "deviceCode": "nokia_pro",
+      "vendorProduct": "nokia_pro",
+      "vendorDevice": "nokia_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-554",
+      "marketing": "Nokia Ultra",
+      "deviceCode": "nokia_ultra",
+      "vendorProduct": "nokia_ultra",
+      "vendorDevice": "nokia_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-590",
+      "marketing": "Nokia Plus",
+      "deviceCode": "nokia",
+      "vendorProduct": "nokia",
+      "vendorDevice": "nokia",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-518",
+      "marketing": "Nokia Ultra",
+      "deviceCode": "nokia_plus",
+      "vendorProduct": "nokia_plus",
+      "vendorDevice": "nokia_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-492",
+      "marketing": "Nokia Plus",
+      "deviceCode": "nokia",
+      "vendorProduct": "nokia",
+      "vendorDevice": "nokia",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-925",
+      "marketing": "Nokia Plus",
+      "deviceCode": "nokia_ultra",
+      "vendorProduct": "nokia_ultra",
+      "vendorDevice": "nokia_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-291",
+      "marketing": "Nokia Plus",
+      "deviceCode": "nokia_ultra",
+      "vendorProduct": "nokia_ultra",
+      "vendorDevice": "nokia_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-528",
+      "marketing": "Nokia",
+      "deviceCode": "nokia_ultra",
+      "vendorProduct": "nokia_ultra",
+      "vendorDevice": "nokia_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-850",
+      "marketing": "Nokia Plus",
+      "deviceCode": "nokia_plus",
+      "vendorProduct": "nokia_plus",
+      "vendorDevice": "nokia_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-235",
+      "marketing": "Nokia Ultra",
+      "deviceCode": "nokia_pro",
+      "vendorProduct": "nokia_pro",
+      "vendorDevice": "nokia_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "TA-322",
+      "marketing": "Nokia",
+      "deviceCode": "nokia_plus",
+      "vendorProduct": "nokia_plus",
+      "vendorDevice": "nokia_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
+  ],
+  "Nothing": [
+    {
+      "modelCode": "A063",
+      "marketing": "Nothing Phone (1)",
+      "deviceCode": "spacewar",
+      "vendorProduct": "spacewar",
+      "vendorDevice": "spacewar",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "A065",
+      "marketing": "Nothing Phone (2)",
+      "deviceCode": "pong",
+      "vendorProduct": "pong",
+      "vendorDevice": "pong",
+      "minRelease": "13",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "A0188",
+      "marketing": "Nothing Phone 5G",
+      "deviceCode": "nothing",
+      "vendorProduct": "nothing",
+      "vendorDevice": "nothing",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "A0592",
+      "marketing": "Nothing Phone 5G",
+      "deviceCode": "nothing_ultra",
+      "vendorProduct": "nothing_ultra",
+      "vendorDevice": "nothing_ultra",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "A0222",
+      "marketing": "Nothing Phone 5G",
+      "deviceCode": "nothing_pro",
+      "vendorProduct": "nothing_pro",
+      "vendorDevice": "nothing_pro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "A0706",
+      "marketing": "Nothing Phone Plus",
+      "deviceCode": "nothing_pro",
+      "vendorProduct": "nothing_pro",
+      "vendorDevice": "nothing_pro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "A0794",
+      "marketing": "Nothing Phone Ultra",
+      "deviceCode": "nothing_pro",
+      "vendorProduct": "nothing_pro",
+      "vendorDevice": "nothing_pro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "A0834",
+      "marketing": "Nothing Phone Ultra",
+      "deviceCode": "nothing_pro",
+      "vendorProduct": "nothing_pro",
+      "vendorDevice": "nothing_pro",
+      "minRelease": "12",
+      "maxRelease": "14"
+    }
+  ],
+  "Honor": [
+    {
+      "modelCode": "ANY-NX9",
+      "marketing": "Honor 50",
+      "deviceCode": "NTH",
+      "vendorProduct": "NTH",
+      "vendorDevice": "NTH",
+      "minRelease": "11",
+      "maxRelease": "13"
+    },
+    {
+      "modelCode": "LGE-NX9",
+      "marketing": "Honor Magic4 Pro",
+      "deviceCode": "LGE",
+      "vendorProduct": "LGE",
+      "vendorDevice": "LGE",
+      "minRelease": "12",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-AN10",
+      "marketing": "Honor Magic6 Pro",
+      "deviceCode": "PGT",
+      "vendorProduct": "PGT",
+      "vendorDevice": "PGT",
+      "minRelease": "14",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-597",
+      "marketing": "Honor Ultra",
+      "deviceCode": "honor_plus",
+      "vendorProduct": "honor_plus",
+      "vendorDevice": "honor_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-688",
+      "marketing": "Honor Ultra",
+      "deviceCode": "honor_pro",
+      "vendorProduct": "honor_pro",
+      "vendorDevice": "honor_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-392",
+      "marketing": "Honor Plus",
+      "deviceCode": "honor",
+      "vendorProduct": "honor",
+      "vendorDevice": "honor",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-758",
+      "marketing": "Honor",
+      "deviceCode": "honor",
+      "vendorProduct": "honor",
+      "vendorDevice": "honor",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-412",
+      "marketing": "Honor Plus",
+      "deviceCode": "honor_ultra",
+      "vendorProduct": "honor_ultra",
+      "vendorDevice": "honor_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-826",
+      "marketing": "Honor",
+      "deviceCode": "honor_pro",
+      "vendorProduct": "honor_pro",
+      "vendorDevice": "honor_pro",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-750",
+      "marketing": "Honor Ultra",
+      "deviceCode": "honor",
+      "vendorProduct": "honor",
+      "vendorDevice": "honor",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-685",
+      "marketing": "Honor Pro",
+      "deviceCode": "honor_ultra",
+      "vendorProduct": "honor_ultra",
+      "vendorDevice": "honor_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-153",
+      "marketing": "Honor",
+      "deviceCode": "honor_plus",
+      "vendorProduct": "honor_plus",
+      "vendorDevice": "honor_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-152",
+      "marketing": "Honor Pro",
+      "deviceCode": "honor",
+      "vendorProduct": "honor",
+      "vendorDevice": "honor",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-472",
+      "marketing": "Honor Ultra",
+      "deviceCode": "honor_ultra",
+      "vendorProduct": "honor_ultra",
+      "vendorDevice": "honor_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-901",
+      "marketing": "Honor",
+      "deviceCode": "honor_plus",
+      "vendorProduct": "honor_plus",
+      "vendorDevice": "honor_plus",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-328",
+      "marketing": "Honor 5G",
+      "deviceCode": "honor_ultra",
+      "vendorProduct": "honor_ultra",
+      "vendorDevice": "honor_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-143",
+      "marketing": "Honor Plus",
+      "deviceCode": "honor",
+      "vendorProduct": "honor",
+      "vendorDevice": "honor",
+      "minRelease": "11",
+      "maxRelease": "14"
+    },
+    {
+      "modelCode": "PGT-036",
+      "marketing": "Honor 5G",
+      "deviceCode": "honor_ultra",
+      "vendorProduct": "honor_ultra",
+      "vendorDevice": "honor_ultra",
+      "minRelease": "11",
+      "maxRelease": "14"
+    }
   ]
 }
