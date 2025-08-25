@@ -22,15 +22,14 @@ public class DeviceProfileGenerator {
     private static final int[] CHROME_MAJOR = {118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136};
     private static final String[] ALL_RELEASES = {"11","12","12L","13","14"};
 
-    // brand -> entries
     private static Map<String, List<DeviceEntry>> DEVICE_MAP;
 
     private static class DeviceEntry {
-        final String modelCode;    // Build.MODEL
-        final String marketing;    // marketing name
-        final String deviceCode;   // Build.DEVICE
-        final String vendorProduct;// ro.build.product / ro.vendor.product.oem
-        final String vendorDevice; // ro.vendor.product.device.oem
+        final String modelCode;
+        final String marketing;
+        final String deviceCode;
+        final String vendorProduct;
+        final String vendorDevice;
         final String minRelease;
         final String maxRelease;
         DeviceEntry(String code, String mk, String dev, String vProd, String vDev, String minR, String maxR) {
@@ -69,21 +68,15 @@ public class DeviceProfileGenerator {
                 JSONArray arr = root.getJSONArray(brand);
                 List<DeviceEntry> list = new ArrayList<>(arr.length());
                 for (int i = 0; i < arr.length(); i++) {
-                    Object item = arr.get(i);
-                    if (item instanceof JSONObject) {
-                        JSONObject o = (JSONObject) item;
-                        String code  = o.optString("modelCode",  o.optString("model", "Generic"));
-                        String mk    = o.optString("marketing", code);
-                        String dev   = o.optString("deviceCode", null);
-                        String vProd = o.optString("vendorProduct", null);
-                        String vDev  = o.optString("vendorDevice", null);
-                        String minR  = o.optString("minRelease", null);
-                        String maxR  = o.optString("maxRelease", null);
-                        list.add(new DeviceEntry(code, mk, dev, vProd, vDev, minR, maxR));
-                    } else {
-                        String code = String.valueOf(item);
-                        list.add(new DeviceEntry(code, code, null, null, null, null, null));
-                    }
+                    JSONObject o = arr.getJSONObject(i);
+                    String code  = o.optString("modelCode", "Generic");
+                    String mk    = o.optString("marketing", code);
+                    String dev   = o.optString("deviceCode", null);
+                    String vProd = o.optString("vendorProduct", null);
+                    String vDev  = o.optString("vendorDevice", null);
+                    String minR  = o.optString("minRelease", null);
+                    String maxR  = o.optString("maxRelease", null);
+                    list.add(new DeviceEntry(code, mk, dev, vProd, vDev, minR, maxR));
                 }
                 if (!list.isEmpty()) DEVICE_MAP.put(brand, list);
             }
@@ -109,7 +102,7 @@ public class DeviceProfileGenerator {
                 : toDeviceCode(e.modelCode, brand, r);
 
         String manufacturer = brand;
-        String buildId = pick(BUILD_IDS, r); // cần pick(String[], Random)
+        String buildId = pick(BUILD_IDS, r);
         String incremental = String.valueOf(1000000 + r.nextInt(9000000));
         String product = (brand + "_" + e.modelCode).toLowerCase(Locale.US).replaceAll("[^a-z0-9]+", "_");
 
@@ -132,18 +125,13 @@ public class DeviceProfileGenerator {
         String ua = makeDynamicUA(release, e.marketing, buildId, r);
 
         return new DeviceProfile(
-                e.modelCode,       // Build.MODEL
-                brand,
-                device,            // Build.DEVICE
-                manufacturer,
-                fingerprint,
+                e.modelCode, brand, device, manufacturer, fingerprint,
                 androidId, imei, serial,
                 advertisingId, adLimitTracking,
                 fiid, appInstanceId, fcmToken,
-                ua,
-                e.marketing,       // marketingName
-                e.vendorProduct,   // vendorProduct
-                e.vendorDevice     // vendorDevice
+                ua, e.marketing,
+                e.vendorProduct, e.vendorDevice,
+                buildId, incremental
         );
     }
 
@@ -184,7 +172,6 @@ public class DeviceProfileGenerator {
         return sb.toString();
     }
 
-    // --- helpers bổ sung: pick cho mảng String
     private static String pick(String[] arr, Random r) {
         return arr[r.nextInt(arr.length)];
     }
@@ -205,9 +192,10 @@ public class DeviceProfileGenerator {
             w.write("FIREBASE_INSTALLATIONS_ID=" + p.firebaseInstallationsId + "\n");
             w.write("FIREBASE_APP_INSTANCE_ID=" + p.appInstanceId + "\n");
             w.write("FCM_TOKEN=" + p.fcmToken + "\n");
-            // vendor lines
             w.write("VENDOR_PRODUCT=" + (p.vendorProduct == null ? "" : p.vendorProduct) + "\n");
-            w.write("VENDOR_DEVICE=" + (p.vendorDevice  == null ? "" : p.vendorDevice ) + "\n");
+            w.write("VENDOR_DEVICE=" + (p.vendorDevice == null ? "" : p.vendorDevice ) + "\n");
+            w.write("BUILD_ID=" + p.buildId + "\n");
+            w.write("BUILD_INCREMENTAL=" + p.buildIncremental + "\n");
             w.write("USER_AGENT=" + p.userAgent + "\n");
         } catch (IOException ignored) {}
     }
@@ -220,10 +208,8 @@ public class DeviceProfileGenerator {
                 String[] kv = line.split("=", 2);
                 if (kv.length == 2) m.put(kv[0], kv[1]);
             }
-            String ua = m.getOrDefault(
-                    "USER_AGENT",
-                    "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
-            );
+            String ua = m.getOrDefault("USER_AGENT",
+                    "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36");
 
             return new DeviceProfile(
                     m.get("MODEL"),
@@ -242,7 +228,9 @@ public class DeviceProfileGenerator {
                     ua,
                     m.getOrDefault("MARKETING", m.getOrDefault("MODEL", "Generic")),
                     m.get("VENDOR_PRODUCT"),
-                    m.get("VENDOR_DEVICE")
+                    m.get("VENDOR_DEVICE"),
+                    m.getOrDefault("BUILD_ID", "TQ3A.230705.001"),
+                    m.getOrDefault("BUILD_INCREMENTAL", "1234567")
             );
         } catch (IOException e) {
             return null;
