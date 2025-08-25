@@ -211,12 +211,32 @@ public class DeviceProfileGenerator {
                 String[] kv = line.split("=", 2);
                 if (kv.length == 2) m.put(kv[0], kv[1]);
             }
-            String ua = m.getOrDefault("USER_AGENT",
-                    "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36");
+            String ua = m.getOrDefault(
+                    "USER_AGENT",
+                    "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36"
+            );
+
             return new DeviceProfile(
-                    m.get("MODEL"), m.get("BRAND"), m.get("DEVICE"),
-                    m.get("MANUFACTURER"), m.get("FINGERPRINT"),
-                    m.get("ANDROID_ID"), m.get("IMEI"), m.get("SERIAL"),
-                    m.getOrDefault("ADVERTISING_ID", UUID.randomUUID().toString()),
+                    m.get("MODEL"),
+                    m.get("BRAND"),
+                    m.get("DEVICE"),
+                    m.get("MANUFACTURER"),
+                    m.get("FINGERPRINT"),
+                    m.get("ANDROID_ID"),
+                    m.get("IMEI"),
+                    m.get("SERIAL"),
+                    m.getOrDefault("ADVERTISING_ID", java.util.UUID.randomUUID().toString()),
                     "true".equalsIgnoreCase(m.getOrDefault("AD_LIMITED","false")),
-                    m.getOrDefault("FIREBASE_INSTALLATIONS_
+                    m.getOrDefault("FIREBASE_INSTALLATIONS_ID", java.util.UUID.randomUUID().toString()),
+                    m.getOrDefault("FIREBASE_APP_INSTANCE_ID", java.util.UUID.randomUUID().toString().replace("-", "")),
+                    m.getOrDefault("FCM_TOKEN", java.util.UUID.randomUUID().toString().replace("-", "")),
+                    ua,
+                    m.getOrDefault("MARKETING", m.getOrDefault("MODEL", "Generic")),
+                    m.get("VENDOR_PRODUCT"),
+                    m.get("VENDOR_DEVICE")
+            );
+        } catch (IOException e) {
+            return null;
+        }
+    }
+}
