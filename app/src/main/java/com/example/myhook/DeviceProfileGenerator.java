@@ -11,14 +11,17 @@ public class DeviceProfileGenerator {
     private static final String[] MODELS = {"Pixel 7","Pixel 8","Pixel 8 Pro","Galaxy S23","Xperia 1 V","OnePlus 11"};
     private static final String[] BRANDS = {"Google","Samsung","Sony","OnePlus","Xiaomi"};
 
-    public DeviceProfileGenerator(String packageName, boolean shouldRandom) {
-        this.profileFile = new File("/sdcard/profile." + packageName + ".txt");
+    public DeviceProfileGenerator(Context ctx, String packageName, boolean shouldRandom) {
+        this.profileFile = new File(ctx.getFilesDir(), "profile." + packageName + ".txt");
         if (shouldRandom || !profileFile.exists()) {
             this.profile = generate();
             save(this.profile);
         } else {
             this.profile = load();
-            if (this.profile == null) { this.profile = generate(); save(this.profile); }
+            if (this.profile == null) {
+                this.profile = generate();
+                save(this.profile);
+            }
         }
     }
 
