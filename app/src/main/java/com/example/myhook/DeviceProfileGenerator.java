@@ -22,24 +22,24 @@ public class DeviceProfileGenerator {
     private static final int[] CHROME_MAJOR = {118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136};
     private static final String[] ALL_RELEASES = {"11","12","12L","13","14"};
 
-    // brand -> list entries
+    // brand -> entries
     private static Map<String, List<DeviceEntry>> DEVICE_MAP;
 
-    // JSON entry
     private static class DeviceEntry {
-        final String modelCode;    // vd SM-G991B
-        final String marketing;    // vd Galaxy S21
-        final String minRelease;   // optional
-        final String maxRelease;   // optional
-        DeviceEntry(String code, String marketing, String minR, String maxR) {
-            this.modelCode = code; this.marketing = marketing; this.minRelease = minR; this.maxRelease = maxR;
+        final String modelCode;   // ex: SM-G991B
+        final String marketing;   // ex: Galaxy S21
+        final String deviceCode;  // ex: o1s (optional)
+        final String minRelease;  // optional
+        final String maxRelease;  // optional
+        DeviceEntry(String code, String marketing, String deviceCode, String minR, String maxR) {
+            this.modelCode = code; this.marketing = marketing; this.deviceCode = deviceCode;
+            this.minRelease = minR; this.maxRelease = maxR;
         }
     }
 
     public DeviceProfileGenerator(Context ctx, String packageName, boolean shouldRandom) {
         this.profileFile = new File(ctx.getFilesDir(), "profile." + packageName + ".txt");
         ensureDevicesLoaded(ctx);
-
         if (shouldRandom || !profileFile.exists()) {
             this.profile = generate();
             save(this.profile);
@@ -51,7 +51,7 @@ public class DeviceProfileGenerator {
 
     public DeviceProfile getProfile() { return profile; }
 
-    // ===== load devices.json =====
+    // ===== load JSON =====
     private static synchronized void ensureDevicesLoaded(Context ctx) {
         if (DEVICE_MAP != null) return;
         DEVICE_MAP = new LinkedHashMap<>();
@@ -70,22 +70,22 @@ public class DeviceProfileGenerator {
                     Object item = arr.get(i);
                     if (item instanceof JSONObject) {
                         JSONObject o = (JSONObject) item;
-                        String code = o.optString("modelCode", o.optString("model", "Generic"));
-                        String marketing = o.optString("marketing", code);
-                        String minR = o.optString("minRelease", null);
-                        String maxR = o.optString("maxRelease", null);
-                        list.add(new DeviceEntry(code, marketing, minR, maxR));
+                        String code  = o.optString("modelCode",  o.optString("model", "Generic"));
+                        String mk    = o.optString("marketing", code);
+                        String dev   = o.optString("deviceCode", null);
+                        String minR  = o.optString("minRelease", null);
+                        String maxR  = o.optString("maxRelease", null);
+                        list.add(new DeviceEntry(code, mk, dev, minR, maxR));
                     } else {
-                        // fallback string only
                         String code = String.valueOf(item);
-                        list.add(new DeviceEntry(code, code, null, null));
+                        list.add(new DeviceEntry(code, code, null, null, null));
                     }
                 }
                 if (!list.isEmpty()) DEVICE_MAP.put(brand, list);
             }
         } catch (Throwable t) {
             DEVICE_MAP.put("Samsung", Arrays.asList(
-                    new DeviceEntry("SM-G991B", "Galaxy S21", "11","13")
+                    new DeviceEntry("SM-G991B", "Galaxy S21", "o1s", "11","13")
             ));
         }
     }
@@ -94,22 +94,22 @@ public class DeviceProfileGenerator {
     private DeviceProfile generate() {
         Random r = new Random();
 
-        // pick brand/entry
         List<String> brands = new ArrayList<>(DEVICE_MAP.keySet());
         String brand = brands.get(r.nextInt(brands.size()));
         List<DeviceEntry> entries = DEVICE_MAP.get(brand);
         DeviceEntry e = entries.get(r.nextInt(entries.size()));
 
-        // Android release bounded by min/max if present
         String release = pickReleaseWithin(e.minRelease, e.maxRelease, r);
 
-        // device code & product
-        String device = toDeviceCode(e.modelCode, brand, r);
+        // Nếu có deviceCode trong JSON, dùng trực tiếp. Nếu không có -> sinh hợp lệ.
+        String device = (e.deviceCode != null && !e.deviceCode.isEmpty())
+                ? e.deviceCode
+                : toDeviceCode(e.modelCode, brand, r);
+
         String manufacturer = brand;
         String buildId = pick(BUILD_IDS, r);
         String incremental = String.valueOf(1000000 + r.nextInt(9000000));
-        String product = (brand + "_" + e.modelCode).toLowerCase(Locale.US)
-                .replaceAll("[^a-z0-9]+", "_");
+        String product = (brand + "_" + e.modelCode).toLowerCase(Locale.US).replaceAll("[^a-z0-9]+", "_");
 
         String fingerprint = String.format(
                 "%s/%s/%s:%s/%s/%s:user/release-keys",
@@ -128,16 +128,19 @@ public class DeviceProfileGenerator {
         String appInstanceId = UUID.randomUUID().toString().replace("-", "");
         String fcmToken = UUID.randomUUID().toString().replace("-", "");
 
-        // UA: dùng marketing name cho tính “thật”
         String ua = makeDynamicUA(release, e.marketing, buildId, r);
 
         return new DeviceProfile(
-                /* model = */ e.modelCode, /* brand = */ brand, /* device = */ device, /* mfr = */ manufacturer, /* fp = */ fingerprint,
+                e.modelCode,       // model (Build.MODEL)
+                brand,             // brand
+                device,            // device (Build.DEVICE)
+                manufacturer,      // manufacturer
+                fingerprint,
                 androidId, imei, serial,
                 advertisingId, adLimitTracking,
                 fiid, appInstanceId, fcmToken,
                 ua,
-                /* marketingName = */ e.marketing
+                e.marketing        // marketingName
         );
     }
 
@@ -170,10 +173,28 @@ public class DeviceProfileGenerator {
         return ordered.get(lo + r.nextInt(hi - lo + 1));
     }
 
+    private static String genImeiLuhn(Random r) {
+        int[] d = new int[15];
+        for (int i = 0; i < 14; i++) d[i] = r.nextInt(10);
+        d[14] = luhnDigit(d, 14);
+        StringBuilder sb = new StringBuilder(15);
+        for (int x : d) sb.append(x);
+        return sb.toString();
+    }
+    private static int luhnDigit(int[] digits, int len) {
+        int sum = 0;
+        for (int i = 0; i < len; i++) {
+            int v = digits[len - 1 - i];
+            if (i % 2 == 0) { v *= 2; if (v > 9) v -= 9; }
+            sum += v;
+        }
+        return (10 - (sum % 10)) % 10;
+    }
+
     private void save(DeviceProfile p) {
         try (BufferedWriter w = new BufferedWriter(new FileWriter(profileFile))) {
-            w.write("MODEL=" + p.model + "\n");                  // modelCode
-            w.write("MARKETING=" + p.marketingName + "\n");       // NEW
+            w.write("MODEL=" + p.model + "\n");
+            w.write("MARKETING=" + p.marketingName + "\n");
             w.write("BRAND=" + p.brand + "\n");
             w.write("DEVICE=" + p.device + "\n");
             w.write("MANUFACTURER=" + p.manufacturer + "\n");
@@ -210,7 +231,7 @@ public class DeviceProfileGenerator {
                     m.getOrDefault("FIREBASE_APP_INSTANCE_ID", UUID.randomUUID().toString().replace("-", "")),
                     m.getOrDefault("FCM_TOKEN", UUID.randomUUID().toString().replace("-", "")),
                     ua,
-                    m.getOrDefault("MARKETING", m.getOrDefault("MODEL", "Generic")) // NEW
+                    m.getOrDefault("MARKETING", m.getOrDefault("MODEL", "Generic"))
             );
         } catch (IOException e) {
             return null;
