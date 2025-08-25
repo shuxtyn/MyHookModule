@@ -3,8 +3,17 @@ package com.example.myhook;
 import java.io.*;
 
 public class ConfigManager {
-    private final File configFile = new File("/sdcard/config.txt");
-    private boolean shouldRandom = false; // mặc định
+    private final File configFile;
+    private boolean shouldRandom = false;
+
+    public ConfigManager(Context ctx) {
+        // chọn internal
+        this.configFile = new File(ctx.getFilesDir(), "config.txt");
+        load();
+    }
+
+    // ... phần load(), save() giữ nguyên ...
+}
 
     public ConfigManager() { load(); }
 
