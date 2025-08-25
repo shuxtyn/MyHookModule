@@ -36,9 +36,9 @@ public class HookInit implements IXposedHookLoadPackage {
                         // Ví dụ hook Build.* (giữ nguyên các hook khác của bạn nếu có)
                         safe(() -> {
                             XposedHelpers.setStaticObjectField(android.os.Build.class, "MODEL", profile.model);
-                            XposedHelpers.setStaticObjectField(android.os.Build.class, "BRAND", profile.brand);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "BRAND", profile.brand.toLowerCase());
                             XposedHelpers.setStaticObjectField(android.os.Build.class, "DEVICE", profile.device);
-                            XposedHelpers.setStaticObjectField(android.os.Build.class, "MANUFACTURER", profile.manufacturer);
+                            XposedHelpers.setStaticObjectField(android.os.Build.class, "MANUFACTURER", profile.manufacturer.toLowerCase());
                             XposedHelpers.setStaticObjectField(android.os.Build.class, "FINGERPRINT", profile.fingerprint);
                         });
 
