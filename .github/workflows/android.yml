@@ -2,66 +2,55 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
-
-env:
-  GRADLE_VERSION: "8.7"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout (with submodules)
         uses: actions/checkout@v4
         with:
-  submodules: true
+          submodules: true         # cần cho Dobby nếu dùng git submodule
+          fetch-depth: 0
 
-    - name: Install CMake & NDK
-  run: |
-    sdkmanager --install "cmake;3.22.1" "ndk;26.1.10909125"
-    echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> $GITHUB_ENV
-
-      
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: temurin
+          java-version: "17"
+          cache: gradle            # cache Gradle cho nhanh hơn
 
-      - name: Cache Gradle
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
 
-      # Tải Gradle 8.7 (1 dòng URL, có retry)
-      - name: Download Gradle ${{ env.GRADLE_VERSION }}
+      - name: Install CMake & NDK
         run: |
-          set -e
-          curl -sSLo gradle-${{ env.GRADLE_VERSION }}-bin.zip "https://services.gradle.org/distributions/gradle-${{ env.GRADLE_VERSION }}-bin.zip" --retry 5 --retry-all-errors
-          unzip -q gradle-${{ env.GRADLE_VERSION }}-bin.zip
+          sdkmanager --install "cmake;3.22.1" "ndk;26.1.10909125"
+          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> $GITHUB_ENV
 
-      # Sinh wrapper "thật" bằng Gradle vừa tải
-      - name: Generate Gradle Wrapper
-        run: |
-          ./gradle-${{ env.GRADLE_VERSION }}/bin/gradle wrapper --gradle-version ${{ env.GRADLE_VERSION }}
-          chmod +x gradlew
-          ./gradlew --version
-          ls -la gradle/wrapper
+      - name: Gradle Wrapper Validation
+        uses: gradle/actions/wrapper-validation@v3
 
-      - name: Build with Gradle (debug)
-        run: ./gradlew --no-daemon assembleDebug
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-      - name: Upload APK
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: MyHookModule-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: MyHookModule-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+
+      # Tuỳ chọn: upload mapping nếu dùng minify/proguard ở release
+      # - name: Upload Mapping (release)
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: proguard-mapping
+      #     path: app/build/outputs/mapping/**/mapping.txt
+      #     if-no-files-found: ignore
