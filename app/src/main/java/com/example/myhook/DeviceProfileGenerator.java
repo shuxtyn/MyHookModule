@@ -2,9 +2,6 @@ package com.example.myhook;
 
 import android.content.Context;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -42,7 +39,7 @@ public class DeviceProfileGenerator {
 
     public DeviceProfileGenerator(Context ctx, String packageName, boolean shouldRandom) {
         this.profileFile = new File(ctx.getFilesDir(), "profile." + packageName + ".txt");
-        ensureDevicesLoaded(ctx);
+        ensureDevicesLoaded(); // <— KHÔNG dùng assets nữa
 
         if (shouldRandom) {
             // Luôn tạo mới & ghi đè
@@ -65,72 +62,112 @@ public class DeviceProfileGenerator {
     public DeviceProfile getProfile() { return profile; }
 
     /**
-     * Load devices.json từ APK của module (KHÔNG dùng ctx của app target).
-     * Sửa MODULE_PKG nếu applicationId module khác.
+     * KHÔNG đọc assets. Dữ liệu nhúng sẵn trong code:
+     * - Anchor thật-dạng vài mẫu phổ biến cho mỗi hãng
+     * - Mở rộng synthetic để tăng độ đa dạng
      */
-    private static synchronized void ensureDevicesLoaded(Context ctx) {
+    private static synchronized void ensureDevicesLoaded() {
         if (DEVICE_MAP != null) return;
         DEVICE_MAP = new LinkedHashMap<>();
 
-        final String MODULE_PKG = "com.example.myhookmodule"; // <-- chỉnh nếu khác
+        // ======== 1) Anchors (một số mẫu phổ biến) ========
+        addEntry("Samsung", "SM-G991B", "Galaxy S21",       "o1s",      "G991BXX", "G991BXX", "11", "13");
+        addEntry("Samsung", "SM-S928B", "Galaxy S24 Ultra", "e3q",      "S928BXX", "S928BXX", "14", "14");
+        addEntry("Samsung", "SM-A546B", "Galaxy A54 5G",    "a54x",     "A546BXX", "A546BXX", "13", "14");
 
+        addEntry("Google",  "Pixel 6",  "Pixel 6",          "oriole",   "oriole",  "oriole",  "12", "14");
+        addEntry("Google",  "Pixel 7",  "Pixel 7",          "panther",  "panther", "panther", "13", "14");
+        addEntry("Google",  "Pixel 8 Pro","Pixel 8 Pro",    "husky",    "husky",   "husky",   "14", "14");
+
+        addEntry("Xiaomi",  "2201123G","Xiaomi 12",         "cupid",    "cupid",   "cupid",   "12", "14");
+        addEntry("Xiaomi",  "23013PC75G","Xiaomi 13",       "fuxi",     "fuxi",    "fuxi",    "13", "14");
+        addEntry("Xiaomi",  "2304FPN6DG","Redmi Note 12 Pro","ruby",    "ruby",    "ruby",    "12", "14");
+
+        addEntry("OnePlus", "LE2123",  "OnePlus 9 Pro",     "lemonadep","lemonadep","lemonadep","11","13");
+        addEntry("OnePlus", "CPH2581", "OnePlus 12",        "aurora",   "aurora",  "aurora",  "14","14");
+
+        addEntry("Oppo",    "PGEM10",  "Oppo Find X5 Pro",  "taro",     "taro",    "taro",    "12","14");
+        addEntry("Oppo",    "PHY110",  "Oppo Find X7 Ultra","OP565FL1", "PHY110",  "OP565FL1","14","14");
+
+        addEntry("Realme",  "RMX3301","Realme GT2 Pro",     "taro",     "taro",    "taro",    "12","14");
+        addEntry("Vivo",    "V2227A", "Vivo X90 Pro",       "taro",     "taro",    "taro",    "13","14");
+
+        addEntry("Huawei",  "ANA-NX9","Huawei P40",         "ANA",      "ANA",     "ANA",     "10","12");
+        addEntry("Huawei",  "ELS-NX9","Huawei P40 Pro",     "ELS",      "ELS",     "ELS",     "10","12");
+
+        addEntry("Motorola","XT2321-1","Moto G84",          "bangkok",  "bangkok", "bangkok", "13","14");
+
+        addEntry("ASUS",    "ASUS_AI2301","ROG Phone 7",    "x20",      "x20",     "x20",     "13","14");
+
+        addEntry("Sony",    "XQ-CT72","Xperia 1 IV",        "pdx223",   "pdx223",  "pdx223",  "12","14");
+
+        addEntry("Nokia",   "TA-1462","Nokia X30 5G",       "Dragon",   "Dragon",  "Dragon",  "12","14");
+
+        addEntry("Nothing", "A065",   "Nothing Phone (2)",  "pong",     "pong",    "pong",    "13","14");
+
+        addEntry("Honor",   "PGT-AN10","Honor Magic6 Pro",  "PGT",      "PGT",     "PGT",     "14","14");
+
+        // ======== 2) Synthetic expansion (nhiều hãng) ========
+        // Tạo thêm entries theo quy luật để tăng phong phú mà không cần file ngoài
+        expandBrand("Samsung", "SM-A", "Galaxy A", "a", 30, "10","14");
+        expandBrand("Samsung", "SM-M", "Galaxy M", "m", 20, "11","14");
+        expandBrand("Samsung", "SM-F", "Galaxy Z", "q", 10, "12","14");
+
+        expandBrand("Google",  "GW",    "Pixel",    "sh", 8,  "11","14");
+        expandBrand("Xiaomi",  "220",   "Xiaomi",   "xm", 20, "11","14");
+        expandBrand("Xiaomi",  "230",   "Redmi",    "rm", 20, "11","14");
+
+        expandBrand("OnePlus", "CPH",   "OnePlus",  "op", 12, "11","14");
+        expandBrand("Oppo",    "CPH",   "Oppo Reno","oppo",20, "11","14");
+        expandBrand("Realme",  "RMX",   "Realme",   "real",15, "12","14");
+        expandBrand("Vivo",    "V",     "Vivo",     "vivo",15, "11","14");
+
+        expandBrand("Huawei",  "ANG-",  "Huawei",   "hwa", 8, "10","12");
+        expandBrand("Motorola","XT",    "Moto",     "moto",10, "11","14");
+        expandBrand("ASUS",    "ASUS_AI","ROG Phone","rog",8,"11","14");
+        expandBrand("Sony",    "XQ-",   "Xperia",   "pdx", 8, "10","14");
+        expandBrand("Nokia",   "TA-",   "Nokia",    "nokia",8,"11","14");
+        expandBrand("Nothing", "A0",    "Nothing Phone","nothing",5,"12","14");
+        expandBrand("Honor",   "PGT-",  "Honor",    "honor",10,"11","14");
+
+        // Log tóm tắt (nếu chạy trong LSPosed sẽ thấy)
         try {
-            Context mctx = ctx.createPackageContext(
-                    MODULE_PKG,
-                    Context.CONTEXT_IGNORE_SECURITY | Context.CONTEXT_INCLUDE_CODE
-            );
+            int modelCount = 0;
+            for (List<DeviceEntry> v : DEVICE_MAP.values()) modelCount += v.size();
+            de.robv.android.xposed.XposedBridge.log("[MyHook] built-in device table: brands=" + DEVICE_MAP.size() + ", models=" + modelCount);
+        } catch (Throwable ignored) {}
+    }
 
-            try (InputStream is = mctx.getAssets().open("devices.json");
-                 BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = br.readLine()) != null) sb.append(line).append('\n');
-                JSONObject root = new JSONObject(sb.toString());
-
-                int brandCount = 0;
-                int modelCount = 0;
-
-                Iterator<String> brands = root.keys();
-                while (brands.hasNext()) {
-                    String brand = brands.next();
-                    JSONArray arr = root.getJSONArray(brand);
-                    brandCount++;
-                    List<DeviceEntry> list = new ArrayList<>(arr.length());
-                    for (int i = 0; i < arr.length(); i++) {
-                        Object item = arr.get(i);
-                        if (item instanceof JSONObject) {
-                            JSONObject o = (JSONObject) item;
-                            String code  = o.optString("modelCode",  o.optString("model", "Generic"));
-                            String mk    = o.optString("marketing", code);
-                            String dev   = o.optString("deviceCode", null);
-                            String vProd = o.optString("vendorProduct", null);
-                            String vDev  = o.optString("vendorDevice", null);
-                            String minR  = o.optString("minRelease", null);
-                            String maxR  = o.optString("maxRelease", null);
-                            list.add(new DeviceEntry(code, mk, dev, vProd, vDev, minR, maxR));
-                            modelCount++;
-                        } else {
-                            String code = String.valueOf(item);
-                            list.add(new DeviceEntry(code, code, null, null, null, null, null));
-                            modelCount++;
-                        }
-                    }
-                    if (!list.isEmpty()) DEVICE_MAP.put(brand, list);
-                }
-
-                de.robv.android.xposed.XposedBridge.log(
-                        "[MyHook] devices.json loaded from module assets: brands=" + brandCount +
-                        ", models=" + modelCount
-                );
-            }
-        } catch (Throwable t) {
-            de.robv.android.xposed.XposedBridge.log("[MyHook] FAILED to load devices.json from module assets: " + t);
-            // Fallback để module vẫn chạy
-            DEVICE_MAP.put("Oppo", Arrays.asList(
-                    new DeviceEntry("PHY110", "Oppo Find X7 Ultra", "OP565FL1", "PHY110", "OP565FL1", "14", "14")
-            ));
+    /** Thêm 1 entry vào DEVICE_MAP */
+    private static void addEntry(String brand, String modelCode, String marketing,
+                                 String deviceCode, String vendorProduct, String vendorDevice,
+                                 String minR, String maxR) {
+        List<DeviceEntry> list = DEVICE_MAP.get(brand);
+        if (list == null) {
+            list = new ArrayList<>();
+            DEVICE_MAP.put(brand, list);
         }
+        list.add(new DeviceEntry(modelCode, marketing, deviceCode, vendorProduct, vendorDevice, minR, maxR));
+    }
+
+    /** Tạo thêm nhiều mẫu “giả lập hợp lý” để random đa dạng */
+    private static void expandBrand(String brand, String basePrefix, String marketingPrefix,
+                                    String devicePrefix, int count, String minR, String maxR) {
+        Random rr = new Random(brand.hashCode() ^ basePrefix.hashCode() ^ devicePrefix.hashCode() ^ count);
+        for (int i = 0; i < count; i++) {
+            String suffix3 = String.format(Locale.US, "%03d", rr.nextInt(900) + 100);
+            String modelCode = basePrefix + suffix3;
+            String mkTier = pick(Arrays.asList("", " Pro", " Plus", " Ultra", " 5G"), rr);
+            String marketing = marketingPrefix + mkTier;
+            String devVar = pick(Arrays.asList("", "_pro", "_plus", "_ultra"), rr);
+            String dev = devicePrefix + devVar;
+
+            addEntry(brand, modelCode, marketing, dev, dev, dev, minR, maxR);
+        }
+    }
+
+    private static <T> T pick(List<T> list, Random r) {
+        return list.get(r.nextInt(list.size()));
     }
 
     private DeviceProfile generate() {
