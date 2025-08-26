@@ -2,14 +2,27 @@ package com.example.myhook;
 
 import android.content.Context;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
+/**
+ * Tạo hồ sơ thiết bị fake:
+ * - Dùng danh sách hardcode thiết bị phổ biến (anchors)
+ * - Cộng thêm mở rộng synthetic đa hãng (có trần) để random phong phú nhưng không lag
+ * - SHOULD_RANDOM=true => luôn sinh profile mới + ghi đè (atomic)
+ * - SHOULD_RANDOM=false => giữ profile cũ
+ */
 public class DeviceProfileGenerator {
     private final File profileFile;
     private DeviceProfile profile;
 
+    // ====== cấu hình sinh dữ liệu ======
+    private static final int MAX_TOTAL_MODELS = 800; // trần an toàn để tránh lag
     private static final String[] BUILD_IDS = {
             "RP1A.200720.012", "RQ3A.210905.001", "SP1A.210812.016",
             "TP1A.220624.021", "TQ2A.230505.002", "TQ3A.230705.001",
@@ -39,19 +52,15 @@ public class DeviceProfileGenerator {
 
     public DeviceProfileGenerator(Context ctx, String packageName, boolean shouldRandom) {
         this.profileFile = new File(ctx.getFilesDir(), "profile." + packageName + ".txt");
-        ensureDevicesLoaded(); // <— KHÔNG dùng assets nữa
+        ensureDevicesLoaded(); // KHÔNG dùng assets
 
         if (shouldRandom) {
-            // Luôn tạo mới & ghi đè
             this.profile = generate();
             saveAtomic(this.profile);
         } else {
             if (profileFile.exists()) {
                 this.profile = load();
-                if (this.profile == null) {
-                    this.profile = generate();
-                    saveAtomic(this.profile);
-                }
+                if (this.profile == null) { this.profile = generate(); saveAtomic(this.profile); }
             } else {
                 this.profile = generate();
                 saveAtomic(this.profile);
@@ -61,113 +70,255 @@ public class DeviceProfileGenerator {
 
     public DeviceProfile getProfile() { return profile; }
 
-    /**
-     * KHÔNG đọc assets. Dữ liệu nhúng sẵn trong code:
-     * - Anchor thật-dạng vài mẫu phổ biến cho mỗi hãng
-     * - Mở rộng synthetic để tăng độ đa dạng
+    /** KHỞI TẠO BẢNG THIẾT BỊ:
+     * bơm nhiều mẫu nhưng có trần để tránh lag; anchors thật-dạng + synthetic mở rộng.
      */
     private static synchronized void ensureDevicesLoaded() {
         if (DEVICE_MAP != null) return;
         DEVICE_MAP = new LinkedHashMap<>();
+        int total = 0;
 
-        // ======== 1) Anchors (một số mẫu phổ biến) ========
-        addEntry("Samsung", "SM-G991B", "Galaxy S21",       "o1s",      "G991BXX", "G991BXX", "11", "13");
-        addEntry("Samsung", "SM-S928B", "Galaxy S24 Ultra", "e3q",      "S928BXX", "S928BXX", "14", "14");
-        addEntry("Samsung", "SM-A546B", "Galaxy A54 5G",    "a54x",     "A546BXX", "A546BXX", "13", "14");
+        // ------------------ SAMSUNG (anchors) ------------------
+        total += addEntry("Samsung", "SM-G991B", "Galaxy S21", "o1s", "o1s", "G991BXX", "11", "13");
+        total += addEntry("Samsung", "SM-G996B", "Galaxy S21+", "p3s", "p3s", "G996BXX", "11", "13");
+        total += addEntry("Samsung", "SM-G998B", "Galaxy S21 Ultra", "p3s", "p3s", "G998BXX", "11", "13");
+        total += addEntry("Samsung", "SM-S901B", "Galaxy S22", "r0s", "r0s", "S901BXX", "12", "14");
+        total += addEntry("Samsung", "SM-S906B", "Galaxy S22+", "r0s", "r0s", "S906BXX", "12", "14");
+        total += addEntry("Samsung", "SM-S908B", "Galaxy S22 Ultra", "r0s", "r0s", "S908BXX", "12", "14");
+        total += addEntry("Samsung", "SM-S911B", "Galaxy S23", "dm1q", "dm1q", "S911BXX", "13", "14");
+        total += addEntry("Samsung", "SM-S916B", "Galaxy S23+", "dm2q", "dm2q", "S916BXX", "13", "14");
+        total += addEntry("Samsung", "SM-S918B", "Galaxy S23 Ultra", "dm3q", "dm3q", "S918BXX", "13", "14");
+        total += addEntry("Samsung", "SM-S921B", "Galaxy S24", "e1q", "e1q", "S921BXX", "14", "14");
+        total += addEntry("Samsung", "SM-S926B", "Galaxy S24+", "e2q", "e2q", "S926BXX", "14", "14");
+        total += addEntry("Samsung", "SM-S928B", "Galaxy S24 Ultra", "e3q", "e3q", "S928BXX", "14", "14");
+        total += addEntry("Samsung", "SM-A146B", "Galaxy A14 5G", "a14", "a14", "A146BXX", "12", "14");
+        total += addEntry("Samsung", "SM-A346B", "Galaxy A34 5G", "a34x", "a34x", "A346BXX", "13", "14");
+        total += addEntry("Samsung", "SM-A546B", "Galaxy A54 5G", "a54x", "a54x", "A546BXX", "13", "14");
+        total += addEntry("Samsung", "SM-M336B", "Galaxy M33 5G", "m33x", "m33x", "M336BXX", "12", "14");
+        total += addEntry("Samsung", "SM-F731B", "Galaxy Z Flip5", "q5", "q5", "F731BXX", "13", "14");
+        total += addEntry("Samsung", "SM-F946B", "Galaxy Z Fold5", "q5", "q5", "F946BXX", "13", "14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Google",  "Pixel 6",  "Pixel 6",          "oriole",   "oriole",  "oriole",  "12", "14");
-        addEntry("Google",  "Pixel 7",  "Pixel 7",          "panther",  "panther", "panther", "13", "14");
-        addEntry("Google",  "Pixel 8 Pro","Pixel 8 Pro",    "husky",    "husky",   "husky",   "14", "14");
+        // ------------------ GOOGLE PIXEL (anchors) ------------------
+        total += addEntry("Google", "Pixel 4", "Pixel 4", "flame", "flame", "flame", "10", "13");
+        total += addEntry("Google", "Pixel 4 XL", "Pixel 4 XL", "coral", "coral", "coral", "10", "13");
+        total += addEntry("Google", "Pixel 5", "Pixel 5", "redfin", "redfin", "redfin", "11", "14");
+        total += addEntry("Google", "Pixel 6", "Pixel 6", "oriole", "oriole", "oriole", "12", "14");
+        total += addEntry("Google", "Pixel 6 Pro", "Pixel 6 Pro", "raven", "raven", "raven", "12", "14");
+        total += addEntry("Google", "Pixel 6a", "Pixel 6a", "bluejay", "bluejay", "bluejay", "12", "14");
+        total += addEntry("Google", "Pixel 7", "Pixel 7", "panther", "panther", "panther", "13", "14");
+        total += addEntry("Google", "Pixel 7 Pro", "Pixel 7 Pro", "cheetah", "cheetah", "cheetah", "13", "14");
+        total += addEntry("Google", "Pixel 7a", "Pixel 7a", "lynx", "lynx", "lynx", "13", "14");
+        total += addEntry("Google", "Pixel 8", "Pixel 8", "shiba", "shiba", "shiba", "14", "14");
+        total += addEntry("Google", "Pixel 8 Pro", "Pixel 8 Pro", "husky", "husky", "husky", "14", "14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Xiaomi",  "2201123G","Xiaomi 12",         "cupid",    "cupid",   "cupid",   "12", "14");
-        addEntry("Xiaomi",  "23013PC75G","Xiaomi 13",       "fuxi",     "fuxi",    "fuxi",    "13", "14");
-        addEntry("Xiaomi",  "2304FPN6DG","Redmi Note 12 Pro","ruby",    "ruby",    "ruby",    "12", "14");
+        // ------------------ XIAOMI / REDMI / POCO (anchors) ------------------
+        total += addEntry("Xiaomi", "2201123G", "Xiaomi 12", "cupid", "cupid", "cupid", "12", "14");
+        total += addEntry("Xiaomi", "2201122C", "Xiaomi 12X", "psyche", "psyche", "psyche", "12", "14");
+        total += addEntry("Xiaomi", "2211133C", "Xiaomi 13", "fuxi", "fuxi", "fuxi", "13", "14");
+        total += addEntry("Xiaomi", "2211133G", "Xiaomi 13 Pro", "nuwa", "nuwa", "nuwa", "13", "14");
+        total += addEntry("Xiaomi", "23013PC75G", "Xiaomi 13 Lite", "ziyi", "ziyi", "ziyi", "13", "14");
+        total += addEntry("Xiaomi", "2304FPN6DG", "Redmi Note 12 Pro", "ruby", "ruby", "ruby", "12", "14");
+        total += addEntry("Xiaomi", "23049PCD8G", "Redmi Note 12", "tapas", "tapas", "tapas", "12", "14");
+        total += addEntry("Xiaomi", "2312DRA50G", "Redmi Note 13 Pro", "garnet", "garnet", "garnet", "13", "14");
+        total += addEntry("Xiaomi", "M2012K11G", "POCO F3", "alioth", "alioth", "alioth", "11", "14");
+        total += addEntry("Xiaomi", "22041216G", "POCO F4", "munch", "munch", "munch", "12", "14");
+        total += addEntry("Xiaomi", "23013PC75I", "POCO X5 Pro", "redwood", "redwood", "redwood", "13", "14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("OnePlus", "LE2123",  "OnePlus 9 Pro",     "lemonadep","lemonadep","lemonadep","11","13");
-        addEntry("OnePlus", "CPH2581", "OnePlus 12",        "aurora",   "aurora",  "aurora",  "14","14");
+        // ------------------ ONEPLUS (anchors) ------------------
+        total += addEntry("OnePlus","HD1913","OnePlus 7T Pro","hotdogg","hotdogg","hotdogg","10","12");
+        total += addEntry("OnePlus","IN2023","OnePlus 8 Pro","instantnoodlep","instantnoodlep","instantnoodlep","10","13");
+        total += addEntry("OnePlus","KB2003","OnePlus 8T","kebab","kebab","kebab","11","13");
+        total += addEntry("OnePlus","LE2113","OnePlus 9","lemonade","lemonade","lemonade","11","13");
+        total += addEntry("OnePlus","LE2123","OnePlus 9 Pro","lemonadep","lemonadep","lemonadep","11","13");
+        total += addEntry("OnePlus","NE2213","OnePlus 10 Pro","negroni","negroni","negroni","12","14");
+        total += addEntry("OnePlus","CPH2411","OnePlus 11","salami","salami","salami","13","14");
+        total += addEntry("OnePlus","CPH2581","OnePlus 12","aurora","aurora","aurora","14","14");
+        total += addEntry("OnePlus","CPH2573","OnePlus 12R","iron","iron","iron","14","14");
+        total += addEntry("OnePlus","PHB110","OnePlus Open","aries","aries","aries","14","14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Oppo",    "PGEM10",  "Oppo Find X5 Pro",  "taro",     "taro",    "taro",    "12","14");
-        addEntry("Oppo",    "PHY110",  "Oppo Find X7 Ultra","OP565FL1", "PHY110",  "OP565FL1","14","14");
+        // ------------------ OPPO (anchors) ------------------
+        total += addEntry("Oppo","CPH2217","OPPO Find X3 Pro","kona","kona","kona","11","13");
+        total += addEntry("Oppo","PGEM10","OPPO Find X5 Pro","taro","taro","taro","12","14");
+        total += addEntry("Oppo","PHU110","OPPO Find X7","OP565F","PHU110","OP565F","14","14");
+        total += addEntry("Oppo","PHY110","OPPO Find X7 Ultra","OP565FL1","PHY110","OP565FL1","14","14");
+        total += addEntry("Oppo","CPH2371","OPPO Reno8","holi","holi","holi","12","14");
+        total += addEntry("Oppo","CPH2437","OPPO Reno10 Pro+","waffle","waffle","waffle","13","14");
+        total += addEntry("Oppo","CPH2449","OPPO Reno11 Pro","ferrari","ferrari","ferrari","14","14");
+        total += addEntry("Oppo","CPH2553","OPPO Reno12","cobalt","cobalt","cobalt","14","14");
+        total += addEntry("Oppo","CPH2609","OPPO A3 Pro","lito","lito","lito","13","14");
+        total += addEntry("Oppo","PFTM10","OPPO K10 Pro","sm8250","sm8250","sm8250","12","13");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Realme",  "RMX3301","Realme GT2 Pro",     "taro",     "taro",    "taro",    "12","14");
-        addEntry("Vivo",    "V2227A", "Vivo X90 Pro",       "taro",     "taro",    "taro",    "13","14");
+        // ------------------ REALME (anchors) ------------------
+        total += addEntry("Realme","RMX3301","realme GT2 Pro","taro","taro","taro","12","14");
+        total += addEntry("Realme","RMX3561","realme GT Neo 3","tienna","tienna","tienna","12","14");
+        total += addEntry("Realme","RMX3741","realme GT5","manet","manet","manet","13","14");
+        total += addEntry("Realme","RMX3820","realme GT6","silver","silver","silver","14","14");
+        total += addEntry("Realme","RMX3771","realme 12 Pro+","jackson","jackson","jackson","14","14");
+        total += addEntry("Realme","RMX3311","realme GT Neo 5","phx","phx","phx","13","14");
+        total += addEntry("Realme","RMX3461","realme Q3s","ossi","ossi","ossi","11","12");
+        total += addEntry("Realme","RMX3393","realme 9 Pro+","miel","miel","miel","12","13");
+        total += addEntry("Realme","RMX3350","realme GT Neo 2","lemon","lemon","lemon","11","12");
+        total += addEntry("Realme","RMX3612","realme 10","stone","stone","stone","12","13");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Huawei",  "ANA-NX9","Huawei P40",         "ANA",      "ANA",     "ANA",     "10","12");
-        addEntry("Huawei",  "ELS-NX9","Huawei P40 Pro",     "ELS",      "ELS",     "ELS",     "10","12");
+        // ------------------ VIVO (anchors) ------------------
+        total += addEntry("Vivo","V2056A","vivo X60 Pro+","kona","kona","kona","11","12");
+        total += addEntry("Vivo","V2145A","vivo X70 Pro+","lahaina","lahaina","lahaina","11","13");
+        total += addEntry("Vivo","V2227A","vivo X90 Pro","taro","taro","taro","13","14");
+        total += addEntry("Vivo","V2241A","vivo X90","taro","taro","taro","13","14");
+        total += addEntry("Vivo","V2303A","vivo X100","blue","blue","blue","14","14");
+        total += addEntry("Vivo","V2307A","vivo X100 Pro","blue","blue","blue","14","14");
+        total += addEntry("Vivo","V2230A","iQOO 11","kalama","kalama","kalama","13","14");
+        total += addEntry("Vivo","V2360A","iQOO 12","zircon","zircon","zircon","14","14");
+        total += addEntry("Vivo","V2141A","vivo Y76 5G","rain","rain","rain","11","12");
+        total += addEntry("Vivo","V2312A","vivo S18","jade","jade","jade","14","14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Motorola","XT2321-1","Moto G84",          "bangkok",  "bangkok", "bangkok", "13","14");
+        // ------------------ HUAWEI (anchors) ------------------
+        total += addEntry("Huawei","ANA-NX9","Huawei P40","ANA","ANA","ANA","10","12");
+        total += addEntry("Huawei","ELS-NX9","Huawei P40 Pro","ELS","ELS","ELS","10","12");
+        total += addEntry("Huawei","NOH-NX9","Huawei Mate 40 Pro","NOH","NOH","NOH","10","12");
+        total += addEntry("Huawei","LIO-N29","Huawei Mate 30 Pro","LIO","LIO","LIO","10","11");
+        total += addEntry("Huawei","TAS-L29","Huawei Mate 30","TAS","TAS","TAS","10","11");
+        total += addEntry("Huawei","VOG-L29","Huawei P30 Pro","VOG","VOG","VOG","9","11");
+        total += addEntry("Huawei","ELE-L29","Huawei P30","ELE","ELE","ELE","9","11");
+        total += addEntry("Huawei","MAR-LX1M","Huawei P30 Lite","MAR","MAR","MAR","9","10");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("ASUS",    "ASUS_AI2301","ROG Phone 7",    "x20",      "x20",     "x20",     "13","14");
+        // ------------------ MOTOROLA (anchors) ------------------
+        total += addEntry("Motorola","XT2125-4","Motorola Edge 20 Pro","berlna","berlna","berlna","11","13");
+        total += addEntry("Motorola","XT2201-2","Motorola Edge 30 Pro","racer","racer","racer","12","13");
+        total += addEntry("Motorola","XT2321-1","Motorola Edge 40","rhode","rhode","rhode","13","14");
+        total += addEntry("Motorola","XT2335-3","Motorola Edge 40 Neo","manaus","manaus","manaus","13","14");
+        total += addEntry("Motorola","XT2311-3","Motorola Razr 40","juno","juno","juno","13","14");
+        total += addEntry("Motorola","XT2313-3","Motorola Razr 40 Ultra","venus","venus","venus","13","14");
+        total += addEntry("Motorola","XT2343-2","Motorola G84","bangkok","bangkok","bangkok","13","14");
+        total += addEntry("Motorola","XT2225-2","Motorola G73","cebu","cebu","cebu","12","13");
+        total += addEntry("Motorola","XT2171-2","Motorola G60","hanoi","hanoi","hanoi","11","12");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Sony",    "XQ-CT72","Xperia 1 IV",        "pdx223",   "pdx223",  "pdx223",  "12","14");
+        // ------------------ ASUS (anchors) ------------------
+        total += addEntry("ASUS","ASUS_I005DA","ROG Phone 5","lithium","lithium","lithium","11","13");
+        total += addEntry("ASUS","ASUS_AI2201","ROG Phone 6","diablo","diablo","diablo","12","13");
+        total += addEntry("ASUS","ASUS_AI2301","ROG Phone 7","x20","x20","x20","13","14");
+        total += addEntry("ASUS","ASUS_AI2401","ROG Phone 8","hydra","hydra","hydra","14","14");
+        total += addEntry("ASUS","ASUS_I003DD","Zenfone 7 Pro","redwood","redwood","redwood","10","12");
+        total += addEntry("ASUS","ASUS_I004D","Zenfone 8","sake","sake","sake","11","13");
+        total += addEntry("ASUS","ASUS_AI2202","Zenfone 9","mermaid","mermaid","mermaid","12","14");
+        total += addEntry("ASUS","ASUS_AI2302","Zenfone 10","catfish","catfish","catfish","13","14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Nokia",   "TA-1462","Nokia X30 5G",       "Dragon",   "Dragon",  "Dragon",  "12","14");
+        // ------------------ SONY (anchors) ------------------
+        total += addEntry("Sony","XQ-AT51","Xperia 1 II","pdx203","pdx203","pdx203","10","12");
+        total += addEntry("Sony","XQ-BC72","Xperia 1 III","pdx215","pdx215","pdx215","11","13");
+        total += addEntry("Sony","XQ-CT72","Xperia 1 IV","pdx223","pdx223","pdx223","12","14");
+        total += addEntry("Sony","XQ-DQ54","Xperia 1 V","pdx234","pdx234","pdx234","14","14");
+        total += addEntry("Sony","XQ-AS52","Xperia 5 II","pdx206","pdx206","pdx206","10","12");
+        total += addEntry("Sony","XQ-BQ62","Xperia 5 III","pdx214","pdx214","pdx214","11","13");
+        total += addEntry("Sony","XQ-CQ44","Xperia 5 IV","pdx224","pdx224","pdx224","12","14");
+        total += addEntry("Sony","XQ-DQ72","Xperia 5 V","pdx236","pdx236","pdx236","14","14");
+        total += addEntry("Sony","XQ-AD51","Xperia 10 II","pdx201","pdx201","pdx201","10","12");
+        total += addEntry("Sony","XQ-BT52","Xperia 10 III","pdx213","pdx213","pdx213","11","12");
+        total += addEntry("Sony","XQ-CT54","Xperia 10 IV","pdx225","pdx225","pdx225","12","14");
+        total += addEntry("Sony","XQ-DQ54","Xperia 10 V","pdx233","pdx233","pdx233","13","14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Nothing", "A065",   "Nothing Phone (2)",  "pong",     "pong",    "pong",    "13","14");
+        // ------------------ NOKIA (anchors) ------------------
+        total += addEntry("Nokia","TA-1462","Nokia X30 5G","dragon","dragon","dragon","12","14");
+        total += addEntry("Nokia","TA-1399","Nokia G60","hima","hima","hima","12","14");
+        total += addEntry("Nokia","TA-1510","Nokia XR21","atlas","atlas","atlas","13","14");
+        total += addEntry("Nokia","TA-1289","Nokia 8.3 5G","draco","draco","draco","10","12");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        addEntry("Honor",   "PGT-AN10","Honor Magic6 Pro",  "PGT",      "PGT",     "PGT",     "14","14");
+        // ------------------ NOTHING (anchors) ------------------
+        total += addEntry("Nothing","A063","Nothing Phone (1)","spacewar","spacewar","spacewar","12","14");
+        total += addEntry("Nothing","A065","Nothing Phone (2)","pong","pong","pong","13","14");
+        total += addEntry("Nothing","A142","Nothing Phone (2a)","pacman","pacman","pacman","14","14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        // ======== 2) Synthetic expansion (nhiều hãng) ========
-        // Tạo thêm entries theo quy luật để tăng phong phú mà không cần file ngoài
-        expandBrand("Samsung", "SM-A", "Galaxy A", "a", 30, "10","14");
-        expandBrand("Samsung", "SM-M", "Galaxy M", "m", 20, "11","14");
-        expandBrand("Samsung", "SM-F", "Galaxy Z", "q", 10, "12","14");
+        // ------------------ HONOR (anchors) ------------------
+        total += addEntry("Honor","NTH-NX9","Honor 50","NTH","NTH","NTH","11","12");
+        total += addEntry("Honor","ANY-NX9","Honor 70","ANY","ANY","ANY","12","13");
+        total += addEntry("Honor","FNE-NX9","Honor 90","FNE","FNE","FNE","13","14");
+        total += addEntry("Honor","PGT-AN10","Honor Magic6 Pro","PGT","PGT","PGT","14","14");
+        total += addEntry("Honor","LGE-AN00","Honor Magic5 Pro","LGE","LGE","LGE","13","14");
+        total += addEntry("Honor","VNE-AN00","Honor X50","VNE","VNE","VNE","13","14");
+        if (total >= MAX_TOTAL_MODELS) { logBuilt(total); return; }
 
-        expandBrand("Google",  "GW",    "Pixel",    "sh", 8,  "11","14");
-        expandBrand("Xiaomi",  "220",   "Xiaomi",   "xm", 20, "11","14");
-        expandBrand("Xiaomi",  "230",   "Redmi",    "rm", 20, "11","14");
+        // ======== SYNTHETIC EXPANSION (có trần) ========
+        total += expandBrandCapped("Samsung", "SM-A", "Galaxy A", "a",   80, "10","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Samsung", "SM-M", "Galaxy M", "m",   40, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Samsung", "SM-F", "Galaxy Z", "q",   25, "12","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
 
-        expandBrand("OnePlus", "CPH",   "OnePlus",  "op", 12, "11","14");
-        expandBrand("Oppo",    "CPH",   "Oppo Reno","oppo",20, "11","14");
-        expandBrand("Realme",  "RMX",   "Realme",   "real",15, "12","14");
-        expandBrand("Vivo",    "V",     "Vivo",     "vivo",15, "11","14");
+        total += expandBrandCapped("Google",  "GW",    "Pixel",    "sh",  20, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
 
-        expandBrand("Huawei",  "ANG-",  "Huawei",   "hwa", 8, "10","12");
-        expandBrand("Motorola","XT",    "Moto",     "moto",10, "11","14");
-        expandBrand("ASUS",    "ASUS_AI","ROG Phone","rog",8,"11","14");
-        expandBrand("Sony",    "XQ-",   "Xperia",   "pdx", 8, "10","14");
-        expandBrand("Nokia",   "TA-",   "Nokia",    "nokia",8,"11","14");
-        expandBrand("Nothing", "A0",    "Nothing Phone","nothing",5,"12","14");
-        expandBrand("Honor",   "PGT-",  "Honor",    "honor",10,"11","14");
+        total += expandBrandCapped("Xiaomi",  "220",   "Xiaomi",   "xm",  80, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Xiaomi",  "230",   "Redmi",    "rm",  80, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
 
-        // Log tóm tắt (nếu chạy trong LSPosed sẽ thấy)
+        total += expandBrandCapped("OnePlus", "CPH",   "OnePlus",  "op",  40, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Oppo",    "CPH",   "Oppo Reno","oppo",60, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Realme",  "RMX",   "Realme",   "real",50, "12","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Vivo",    "V",     "Vivo",     "vivo",50, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+
+        total += expandBrandCapped("Huawei",  "ANG-",  "Huawei",   "hwa", 30, "10","12", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Motorola","XT",    "Moto",     "moto",30, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("ASUS",    "ASUS_AI","ROG Phone","rog",20, "11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Sony",    "XQ-",   "Xperia",   "pdx", 20, "10","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Nokia",   "TA-",   "Nokia",    "nokia",20,"11","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Nothing", "A0",    "Nothing Phone","nothing",12,"12","14", total); if (total>=MAX_TOTAL_MODELS){logBuilt(total);return;}
+        total += expandBrandCapped("Honor",   "PGT-",  "Honor",    "honor",30,"11","14", total);
+
+        logBuilt(total);
+    }
+
+    private static void logBuilt(int total) {
         try {
-            int modelCount = 0;
-            for (List<DeviceEntry> v : DEVICE_MAP.values()) modelCount += v.size();
-            de.robv.android.xposed.XposedBridge.log("[MyHook] built-in device table: brands=" + DEVICE_MAP.size() + ", models=" + modelCount);
+            de.robv.android.xposed.XposedBridge.log("[MyHook] built-in device table ready: brands=" + DEVICE_MAP.size() + ", models=" + total);
         } catch (Throwable ignored) {}
     }
 
-    /** Thêm 1 entry vào DEVICE_MAP */
-    private static void addEntry(String brand, String modelCode, String marketing,
-                                 String deviceCode, String vendorProduct, String vendorDevice,
-                                 String minR, String maxR) {
+    /** add 1 entry, trả về 1 nếu thêm thành công (để cộng dồn total) */
+    private static int addEntry(String brand, String modelCode, String marketing,
+                                String deviceCode, String vendorProduct, String vendorDevice,
+                                String minR, String maxR) {
         List<DeviceEntry> list = DEVICE_MAP.get(brand);
         if (list == null) {
             list = new ArrayList<>();
             DEVICE_MAP.put(brand, list);
         }
         list.add(new DeviceEntry(modelCode, marketing, deviceCode, vendorProduct, vendorDevice, minR, maxR));
+        return 1;
     }
 
-    /** Tạo thêm nhiều mẫu “giả lập hợp lý” để random đa dạng */
-    private static void expandBrand(String brand, String basePrefix, String marketingPrefix,
-                                    String devicePrefix, int count, String minR, String maxR) {
+    /** Mở rộng có trần: nếu đạt MAX_TOTAL_MODELS thì dừng ngay */
+    private static int expandBrandCapped(String brand, String basePrefix, String marketingPrefix,
+                                         String devicePrefix, int count, String minR, String maxR, int currentTotal) {
+        int added = 0;
         Random rr = new Random(brand.hashCode() ^ basePrefix.hashCode() ^ devicePrefix.hashCode() ^ count);
+        final String[] suffixTiers = {"", " Pro", " Plus", " Ultra", " 5G"};
+        final String[] devTiers = {"", "_pro", "_plus", "_ultra"};
+
+        List<DeviceEntry> list = DEVICE_MAP.get(brand);
+        if (list == null) { list = new ArrayList<>(); DEVICE_MAP.put(brand, list); }
+
         for (int i = 0; i < count; i++) {
+            if (currentTotal + added >= MAX_TOTAL_MODELS) break;
+
             String suffix3 = String.format(Locale.US, "%03d", rr.nextInt(900) + 100);
             String modelCode = basePrefix + suffix3;
-            String mkTier = pick(Arrays.asList("", " Pro", " Plus", " Ultra", " 5G"), rr);
-            String marketing = marketingPrefix + mkTier;
-            String devVar = pick(Arrays.asList("", "_pro", "_plus", "_ultra"), rr);
-            String dev = devicePrefix + devVar;
 
-            addEntry(brand, modelCode, marketing, dev, dev, dev, minR, maxR);
+            String marketing = marketingPrefix + suffixTiers[rr.nextInt(suffixTiers.length)];
+            String dev = devicePrefix + devTiers[rr.nextInt(devTiers.length)];
+
+            list.add(new DeviceEntry(modelCode, marketing, dev, dev, dev, minR, maxR));
+            added++;
         }
-    }
-
-    private static <T> T pick(List<T> list, Random r) {
-        return list.get(r.nextInt(list.size()));
+        return added;
     }
 
     private DeviceProfile generate() {
@@ -187,9 +338,11 @@ public class DeviceProfileGenerator {
         String manufacturer = brand;
         String buildId = pick(BUILD_IDS, r);
         String incremental = String.valueOf(1000000 + r.nextInt(9000000));
-        String product = (brand + "_" + e.modelCode).toLowerCase(Locale.US).replaceAll("[^a-z0-9]+", "_");
+        String product = (brand + "_" + e.modelCode).toLowerCase(Locale.US)
+                .replace(' ', '_').replace('/', '_');
 
         String fingerprint = String.format(
+                Locale.US,
                 "%s/%s/%s:%s/%s/%s:user/release-keys",
                 brand.toLowerCase(Locale.US), product, device, release, buildId, incremental
         );
@@ -230,7 +383,7 @@ public class DeviceProfileGenerator {
 
     private static String toDeviceCode(String modelCode, String brand, Random r) {
         String base = (brand + "_" + modelCode).toLowerCase(Locale.US)
-                .replaceAll("[^a-z0-9]+", "_").replaceAll("^_+|_+$", "");
+                .replace(' ', '_').replace('/', '_');
         return base + "_" + (100 + r.nextInt(900));
     }
 
@@ -255,16 +408,18 @@ public class DeviceProfileGenerator {
         int[] d = new int[15];
         for (int i = 0; i < 14; i++) d[i] = r.nextInt(10);
         int sum = 0;
-        for (int i = 0; i < 14; i++) { int v = d[13 - i]; if (i % 2 == 0) { v *= 2; if (v > 9) v -= 9; } sum += v; }
+        for (int i = 0; i < 14; i++) {
+            int v = d[13 - i];
+            if (i % 2 == 0) { v *= 2; if (v > 9) v -= 9; }
+            sum += v;
+        }
         d[14] = (10 - (sum % 10)) % 10;
         StringBuilder sb = new StringBuilder(15);
         for (int x : d) sb.append(x);
         return sb.toString();
     }
 
-    private static String pick(String[] arr, Random r) {
-        return arr[r.nextInt(arr.length)];
-    }
+    private static String pick(String[] arr, Random r) { return arr[r.nextInt(arr.length)]; }
 
     // --- Ghi đè an toàn bằng file tạm rồi rename ---
     private void saveAtomic(DeviceProfile p) {
