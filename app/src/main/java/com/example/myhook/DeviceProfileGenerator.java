@@ -22,7 +22,6 @@ public class DeviceProfileGenerator {
     private static final int[] CHROME_MAJOR = {118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136};
     private static final String[] ALL_RELEASES = {"11","12","12L","13","14"};
 
-    // brand -> entries
     private static Map<String, List<DeviceEntry>> DEVICE_MAP;
 
     private static class DeviceEntry {
@@ -45,7 +44,7 @@ public class DeviceProfileGenerator {
         ensureDevicesLoaded(ctx);
 
         if (shouldRandom) {
-            // LUÔN tạo mới & ghi đè (không load cũ)
+            // LUÔN tạo mới & ghi đè, không load cũ
             this.profile = generate();
             saveAtomic(this.profile);
         } else {
@@ -98,7 +97,7 @@ public class DeviceProfileGenerator {
                 if (!list.isEmpty()) DEVICE_MAP.put(brand, list);
             }
         } catch (Throwable t) {
-            // Fallback nhỏ để vẫn chạy được nếu assets/devices.json thiếu
+            // Fallback nhỏ để vẫn chạy nếu assets thiếu
             DEVICE_MAP.put("Oppo", Arrays.asList(
                     new DeviceEntry("PHY110", "Oppo Find X7 Ultra", "OP565FL1", "PHY110", "OP565FL1", "14", "14")
             ));
@@ -240,7 +239,7 @@ public class DeviceProfileGenerator {
         }
     }
 
-    // Giữ save() cũ làm fallback/tiện dùng lại
+    // Fallback save
     private void save(DeviceProfile p) {
         try (BufferedWriter w = new BufferedWriter(new FileWriter(profileFile))) {
             w.write("MODEL=" + p.model + "\n");
