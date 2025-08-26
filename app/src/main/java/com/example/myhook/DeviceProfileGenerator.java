@@ -13,6 +13,9 @@ public class DeviceProfileGenerator {
     private final File profileFile;
     private DeviceProfile profile;
 
+    // ĐỔI CHO KHỚP applicationId của module (app/build.gradle)
+    private static final String MODULE_PKG = "com.example.myhookmodule";
+
     private static final String[] BUILD_IDS = {
             "RP1A.200720.012", "RQ3A.210905.001", "SP1A.210812.016",
             "TP1A.220624.021", "TQ2A.230505.002", "TQ3A.230705.001",
@@ -22,6 +25,7 @@ public class DeviceProfileGenerator {
     private static final int[] CHROME_MAJOR = {118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136};
     private static final String[] ALL_RELEASES = {"11","12","12L","13","14"};
 
+    // brand -> entries
     private static Map<String, List<DeviceEntry>> DEVICE_MAP;
 
     private static class DeviceEntry {
@@ -66,38 +70,58 @@ public class DeviceProfileGenerator {
     private static synchronized void ensureDevicesLoaded(Context ctx) {
         if (DEVICE_MAP != null) return;
         DEVICE_MAP = new LinkedHashMap<>();
-        try (InputStream is = ctx.getAssets().open("devices.json");
-             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-            StringBuilder sb = new StringBuilder();
-            String line; while ((line = br.readLine()) != null) sb.append(line).append('\n');
-            JSONObject root = new JSONObject(sb.toString());
+        try {
+            // Đọc assets từ APK của MODULE, không phải app target
+            Context mctx = ctx.createPackageContext(
+                    MODULE_PKG,
+                    Context.CONTEXT_IGNORE_SECURITY | Context.CONTEXT_INCLUDE_CODE
+            );
 
-            Iterator<String> brands = root.keys();
-            while (brands.hasNext()) {
-                String brand = brands.next();
-                JSONArray arr = root.getJSONArray(brand);
-                List<DeviceEntry> list = new ArrayList<>(arr.length());
-                for (int i = 0; i < arr.length(); i++) {
-                    Object item = arr.get(i);
-                    if (item instanceof JSONObject) {
-                        JSONObject o = (JSONObject) item;
-                        String code  = o.optString("modelCode",  o.optString("model", "Generic"));
-                        String mk    = o.optString("marketing", code);
-                        String dev   = o.optString("deviceCode", null);
-                        String vProd = o.optString("vendorProduct", null);
-                        String vDev  = o.optString("vendorDevice", null);
-                        String minR  = o.optString("minRelease", null);
-                        String maxR  = o.optString("maxRelease", null);
-                        list.add(new DeviceEntry(code, mk, dev, vProd, vDev, minR, maxR));
-                    } else {
-                        String code = String.valueOf(item);
-                        list.add(new DeviceEntry(code, code, null, null, null, null, null));
+            int brandCount = 0;
+            int modelCount = 0;
+
+            try (InputStream is = mctx.getAssets().open("devices.json");
+                 BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                StringBuilder sb = new StringBuilder();
+                String line; while ((line = br.readLine()) != null) sb.append(line).append('\n');
+                JSONObject root = new JSONObject(sb.toString());
+
+                Iterator<String> brands = root.keys();
+                while (brands.hasNext()) {
+                    String brand = brands.next();
+                    JSONArray arr = root.getJSONArray(brand);
+                    brandCount++;
+                    List<DeviceEntry> list = new ArrayList<>(arr.length());
+                    for (int i = 0; i < arr.length(); i++) {
+                        Object item = arr.get(i);
+                        if (item instanceof JSONObject) {
+                            JSONObject o = (JSONObject) item;
+                            String code  = o.optString("modelCode",  o.optString("model", "Generic"));
+                            String mk    = o.optString("marketing", code);
+                            String dev   = o.optString("deviceCode", null);
+                            String vProd = o.optString("vendorProduct", null);
+                            String vDev  = o.optString("vendorDevice", null);
+                            String minR  = o.optString("minRelease", null);
+                            String maxR  = o.optString("maxRelease", null);
+                            list.add(new DeviceEntry(code, mk, dev, vProd, vDev, minR, maxR));
+                            modelCount++;
+                        } else {
+                            String code = String.valueOf(item);
+                            list.add(new DeviceEntry(code, code, null, null, null, null, null));
+                            modelCount++;
+                        }
                     }
+                    if (!list.isEmpty()) DEVICE_MAP.put(brand, list);
                 }
-                if (!list.isEmpty()) DEVICE_MAP.put(brand, list);
             }
+
+            de.robv.android.xposed.XposedBridge.log(
+                    "[MyHook] devices.json loaded from module assets: brands=" + brandCount + ", models=" + modelCount
+            );
+
         } catch (Throwable t) {
-            // Fallback nhỏ để vẫn chạy nếu assets thiếu
+            de.robv.android.xposed.XposedBridge.log("[MyHook] FAILED to load devices.json from module assets: " + t);
+            // Fallback tối thiểu (lý do bạn luôn ra Oppo nếu thiếu devices.json)
             DEVICE_MAP.put("Oppo", Arrays.asList(
                     new DeviceEntry("PHY110", "Oppo Find X7 Ultra", "OP565FL1", "PHY110", "OP565FL1", "14", "14")
             ));
