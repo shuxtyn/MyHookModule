@@ -191,7 +191,42 @@ public class HookInit implements IXposedHookLoadPackage {
         return (s == null) ? null : s.toLowerCase(Locale.US);
     }
 
+    
     private static void safe(Runnable r) {
         try { r.run(); } catch (Throwable t) { XposedBridge.log(t); }
     }
+}
+try {
+    NativeBridge.initHooks(lpparam.packageName);
+
+    java.util.ArrayList<String> k = new java.util.ArrayList<>();
+    java.util.ArrayList<String> v = new java.util.ArrayList<>();
+
+    k.add("ro.product.brand");            v.add(profile.brand);
+    k.add("ro.product.model");            v.add(profile.model);
+    k.add("ro.product.device");           v.add(profile.device);
+    k.add("ro.product.manufacturer");     v.add(profile.manufacturer);
+    k.add("ro.build.fingerprint");        v.add(profile.fingerprint);
+    k.add("ro.build.id");                 v.add(profile.buildId);
+    k.add("ro.build.version.incremental");v.add(profile.buildIncremental);
+
+    if (profile.vendorProduct != null) {
+        k.add("ro.vendor.product.oem");   v.add(profile.vendorProduct);
+        k.add("ro.build.product");        v.add(profile.vendorProduct);
+        k.add("ro.product.name");         v.add(profile.vendorProduct);
+    }
+    if (profile.vendorDevice != null) {
+        k.add("ro.vendor.product.device.oem"); v.add(profile.vendorDevice);
+    }
+
+    k.add("ro.vendor.build.fingerprint");    v.add(profile.fingerprint);
+    k.add("ro.odm.build.fingerprint");       v.add(profile.fingerprint);
+    k.add("ro.bootimage.build.fingerprint"); v.add(profile.fingerprint);
+
+    NativeBridge.setOverrides(
+        k.toArray(new String[0]),
+        v.toArray(new String[0])
+    );
+} catch (Throwable t) {
+    de.robv.android.xposed.XposedBridge.log(t);
 }
