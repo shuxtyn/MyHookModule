@@ -17,7 +17,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+  submodules: true
 
+    - name: Install CMake & NDK
+  run: |
+    sdkmanager --install "cmake;3.22.1" "ndk;26.1.10909125"
+    echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> $GITHUB_ENV
+
+      
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
