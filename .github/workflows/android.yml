@@ -12,7 +12,7 @@ jobs:
       - name: Checkout (with submodules)
         uses: actions/checkout@v4
         with:
-          submodules: true           # cần nếu Dobby dùng git submodule
+          submodules: true
           fetch-depth: 0
 
       - name: Set up JDK 17
@@ -30,17 +30,18 @@ jobs:
           sdkmanager --install "cmake;3.22.1" "ndk;26.1.10909125"
           echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> $GITHUB_ENV
 
-      # Repo chưa có Wrapper -> sinh wrapper trước, rồi mới validate
-      - name: Generate Gradle Wrapper (8.7)
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: wrapper --gradle-version 8.7
+      # Generate Gradle Wrapper WITHOUT relying on ./gradlew
+      - name: Download Gradle 8.7 and generate wrapper
+        run: |
+          set -e
+          curl -L -o gradle-8.7-bin.zip https://services.gradle.org/distributions/gradle-8.7-bin.zip
+          unzip -q gradle-8.7-bin.zip
+          ./gradle-8.7/bin/gradle --version
+          ./gradle-8.7/bin/gradle wrapper --gradle-version 8.7
+          chmod +x gradlew
 
       - name: Gradle Wrapper Validation
         uses: gradle/actions/wrapper-validation@v3
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
