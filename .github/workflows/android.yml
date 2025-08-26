@@ -12,7 +12,7 @@ jobs:
       - name: Checkout (with submodules)
         uses: actions/checkout@v4
         with:
-          submodules: true         # cần cho Dobby nếu dùng git submodule
+          submodules: true
           fetch-depth: 0
 
       - name: Set up JDK 17
@@ -20,7 +20,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-          cache: gradle            # cache Gradle cho nhanh hơn
+          cache: gradle
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -30,6 +30,13 @@ jobs:
           sdkmanager --install "cmake;3.22.1" "ndk;26.1.10909125"
           echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> $GITHUB_ENV
 
+      # Tạo Gradle Wrapper (vì repo chưa có)
+      - name: Generate Gradle Wrapper (8.7)
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: wrapper --gradle-version 8.7
+
+      # Sau khi đã sinh wrapper, giờ mới validate
       - name: Gradle Wrapper Validation
         uses: gradle/actions/wrapper-validation@v3
 
@@ -45,12 +52,3 @@ jobs:
           name: MyHookModule-debug-apk
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
-
-      # Tuỳ chọn: upload mapping nếu dùng minify/proguard ở release
-      # - name: Upload Mapping (release)
-      #   if: always()
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: proguard-mapping
-      #     path: app/build/outputs/mapping/**/mapping.txt
-      #     if-no-files-found: ignore
