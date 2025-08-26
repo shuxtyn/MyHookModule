@@ -38,10 +38,8 @@ public class ConfigManager {
         }
     }
 
-    public boolean shouldRandom() { return shouldRandom; }
+    public boolean shouldRandom() { return shouldRandom; }       // hoặc load() trước khi trả kết quả nếu muốn
+public void setShouldRandom(boolean v) { shouldRandom = v; save(); }
 
-    public void setShouldRandom(boolean v) {
-        shouldRandom = v;
-        save();
     }
 }
