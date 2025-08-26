@@ -53,7 +53,7 @@ public class ConfigManager {
 
     /** Trả về cờ random hiện tại. Nếu muốn luôn lấy mới từ file, có thể gọi load() trước khi return. */
     public synchronized boolean shouldRandom() {
-        // load(); // bật nếu muốn luôn đọc lại file mỗi lần hỏi
+         load(); // bật nếu muốn luôn đọc lại file mỗi lần hỏi
         return shouldRandom;
     }
 
